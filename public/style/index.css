@@ -1,0 +1,200 @@
+body {
+  margin: 0;
+  font-family: 'Georgia', serif;
+  background-color: #151515;
+  color: white;
+}
+header {
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #151515;
+  position: relative;
+}
+nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+.menu_toggle {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+}
+.menu_toggle span {
+  height: 3px;
+  width: 25px;
+  background: white;
+  margin: 4px 0;
+  border-radius: 2px;
+}
+.mobile_nav {
+  display: none;
+  position: absolute;
+  top: 70px;
+  right: 40px;
+  background-color: #151515;
+  flex-direction: column;
+  padding: 10px;
+  border-radius: 5px;
+}
+.mobile_nav a {
+  padding: 10px;
+  text-decoration: none;
+  color: white;
+}
+.hero {
+  background: url('../media/burger_home_page.jpg') center center/cover no-repeat;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+}
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+  color: white;
+  text-shadow: 1px 1px 3px black;
+}
+.hero p {
+  max-width: 600px;
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 3px black;
+}
+.button {
+  background-color: gold;
+  color: black;
+  border: none;
+  padding: 12px 24px;
+  font-size: 18px;
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 5px;
+}
+.section {
+  padding: 60px 40px;
+  background-color: #000000;
+  text-align: center;
+}
+.cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 40px;
+}
+.card {
+  background-color: #151515;
+  width: 300px;
+  padding: 20px;
+  text-align: left;
+  border-radius: 8px;
+}
+.card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+.info_section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #151515;
+  padding: 60px 40px;
+  flex-wrap: wrap;
+}
+.info_text {
+  flex: 1;
+  padding-right: 40px;
+}
+.info_image {
+  flex: 1;
+  margin-top: 20px;
+}
+.info_image img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 8px;
+}
+input, select {
+  padding: 10px;
+  background-color: #222;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  min-width: 150px;
+}
+button[type="submit"] {
+  background-color: gold;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+footer {
+  background-color: #191919;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 40px;
+  font-size: 14px;
+}
+.footer_col {
+  margin-bottom: 20px;
+  min-width: 150px;
+}
+
+/* Responsive/Mobile Design */
+@media (max-width: 768px) {
+  nav {
+    display: none;
+  }
+  .menu_toggle {
+    display: flex;
+  }
+  .hero {
+    height: auto;
+    padding: 60px 20px;
+  }
+  .hero h1 {
+    font-size: 32px;
+  }
+  .hero p {
+    font-size: 16px;
+  }
+  .info_section {
+    flex-direction: column;
+    padding: 40px 20px;
+  }
+  .info_text {
+    padding-right: 0;
+    text-align: center;
+  }
+  .info_image {
+    margin-top: 20px;
+    width: 100%;
+  }
+  .card {
+    width: 90%;
+    margin: auto;
+  }
+  footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
