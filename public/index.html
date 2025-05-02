@@ -12,9 +12,11 @@
   <div>BURGER AND GOLD</div>
 
   <nav id="nav_links">
-    <a href="#">Home</a>
-    <a href="#">Menu</a>
-    <img src="media/shopping_cart.png" alt="Shopping Cart" style="width: 2vw;">
+    <a href="/public/index.html">Home</a>
+    <a href="/public/product_menu.html">Menu</a>
+    <a href="/public/checkout.html">
+      <img src="media/shopping_cart.png" alt="Shopping Cart" style="width: 2vw;">
+    </a>
   </nav>
 
   <div class="menu_toggle" id="mobile_menu">
@@ -24,8 +26,11 @@
   </div>
 
   <div class="mobile_nav" id="mobile_nav">
-    <a href="#">Home</a>
-    <a href="#">Menu</a>
+    <a href="/public/index.html">Home</a>
+    <a href="/public/product_menu.html">Menu</a>
+    <a href="/public/checkout.html">
+      <img src="media/shopping_cart.png" alt="Shopping Cart" style="width: 2vw;">
+    </a>
   </div>
 </header>
 
@@ -96,11 +101,13 @@
 </footer>
 
 <script>
+  // Taget från https://stackoverflow.com/questions/73379709/how-to-toggle-a-responsive-navbar-with-javascript
+
   const mobileMenu = document.getElementById('mobile_menu');
   const mobileNav = document.getElementById('mobile_nav');
 
-  mobileMenu.addEventListener('click', () => {
-    mobileNav.style.display = mobileNav.style.display === 'flex' ? 'none' : 'flex';
+  mobileMenu.addEventListener("click", () => {
+    mobileNav.style.display = mobileNav.style.display === "flex" ? "none" : "flex";
   });
 </script>
 
