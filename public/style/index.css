@@ -35,20 +35,33 @@ nav a {
   border-radius: 2px;
 }
 .mobile_nav {
-  display: none;
-  position: absolute;
-  top: 70px;
-  right: 40px;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 70%;
+  height: 100%;
   background-color: #151515;
   flex-direction: column;
-  padding: 10px;
-  border-radius: 5px;
+  padding: 60px 20px;
+  border-left: 2px solid gold;
+  transition: right 0.3s ease-in-out;
+  display: flex; /* always flex, animation handles visibility */
+  z-index: 1000;
 }
+
 .mobile_nav a {
-  padding: 10px;
+  padding: 15px;
   text-decoration: none;
   color: white;
+  font-size: 18px;
+  border-bottom: 1px solid #333;
 }
+
+/* Class to activate sliding */
+.mobile_nav.active {
+  right: 0;
+}
+
 .hero {
   background: url('../media/burger_home_page.jpg') center center/cover no-repeat;
   height: 90vh;
@@ -62,13 +75,21 @@ nav a {
 .hero h1 {
   font-size: 48px;
   margin-bottom: 20px;
-  color: white;
-  text-shadow: 1px 1px 3px black;
+  color: rgb(255, 255, 255);
+  text-shadow:
+    0 0 5px #ffd700,
+    0 0 10px #ffcc00,
+    0 0 20px #ffcc00,
+    0 0 30px #ffaa00;
 }
 .hero p {
   max-width: 600px;
   margin-bottom: 20px;
-  text-shadow: 1px 1px 3px black;
+  text-shadow:
+    0 0 5px #ffd700,
+    0 0 10px #ffcc00,
+    0 0 20px #ffcc00,
+    0 0 30px #ffaa00;
 }
 .button {
   background-color: gold;
@@ -148,15 +169,21 @@ button[type="submit"] {
 footer {
   background-color: #191919;
   display: flex;
-  justify-content: space-between;
   flex-wrap: wrap;
-  padding: 40px;
+  justify-content: space-between;
+  padding: 40px 20px;
   font-size: 14px;
+  color: white;
+  gap: 20px;
 }
+
 .footer_col {
-  margin-bottom: 20px;
-  min-width: 150px;
+  flex: 1 1 150px;
+  min-width: 120px;
 }
+
+
+
 
 /* Responsive/Mobile Design */
 @media (max-width: 768px) {
@@ -192,9 +219,81 @@ footer {
     width: 90%;
     margin: auto;
   }
+
+
+}
+
+
+
+.topbar {
+  background-color: #1f1f1f;
+  padding: 8px 40px;
+  color: white;
+  font-size: 14px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.topbar-content {
+  display: flex;
+  align-items: center;
+}
+
+.mina-sidor-btn {
+  background-color: gold;
+  color: black;
+  border: none;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  /* Se till att footern är responsiv */
   footer {
-    flex-direction: column;
-    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
     text-align: center;
+    gap: 20px;
+    padding: 30px 10px;
   }
+
+  .footer_col {
+    flex: 1 1 45%;
+    min-width: 150px;
+    margin-bottom: 20px;
+  }
+
+  footer iframe {
+    width: 100%;
+    height: 150px;
+  }
+
+  .button {
+    width: 100%;
+    max-width: 300px;
+  }
+
+  .topbar {
+    padding: 8px 20px;
+    justify-content: end;
+  }
+}
+
+.fullwidth-map {
+  width: 100vw;
+  height: 200px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.fullwidth-map iframe {
+  border: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
