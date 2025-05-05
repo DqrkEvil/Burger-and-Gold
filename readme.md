@@ -32,7 +32,7 @@ Om du vill komma åt sidan från en annan enhet i samma nätverk (t.ex. mobil el
 → Nätverk:  http://192.168.1.45:3000
 ```
 
-## 5. Felsökning
+## Felsökning
 
 Om du får `MODULE_NOT_FOUND` eller liknande fel:
 - Kontrollera att filen `server.js` ligger i mappen `server/`
