@@ -129,3 +129,47 @@ app.put('/api/products/:id', async (req, res) => {
     res.status(500).send('Kunde inte uppdatera pris');
   }
 });
+
+
+app.post('/api/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    const result = await pool.query(
+      'SELECT * FROM users WHERE email = $1 AND password = $2',
+      [email, password]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(401).send('Fel e-post eller lösenord');
+    }
+
+    // Inloggning lyckades
+    res.status(200).json({ message: 'Inloggad', user: result.rows[0] });
+  } catch (err) {
+    console.error('Fel vid inloggning:', err);
+    res.status(500).send('Serverfel vid inloggning');
+  }
+});
+
+app.post('/api/register', async (req, res) => {
+  const { name, email, password, nummer, address, city, postal_code } = req.body;
+
+  try {
+    const checkUser = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
+    if (checkUser.rows.length > 0) {
+      return res.status(400).send('E-postadressen är redan registrerad');
+    }
+
+    const result = await pool.query(
+      `INSERT INTO users (name, email, password, nummer, address, city, postal_code)
+       VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *`,
+      [name, email, password, nummer, address, city, postal_code]
+    );
+
+    res.status(201).json({ message: 'Användare registrerad', user: result.rows[0] });
+  } catch (err) {
+    console.error('Fel vid registrering:', err);
+    res.status(500).send('Serverfel vid registrering');
+  }
+});
