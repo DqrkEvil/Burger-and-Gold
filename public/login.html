@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <title>Logga in</title>
+</head>
+<body>
+  <h2>Logga in</h2>
+  <form id="loginForm">
+    <label for="email">E-post:</label>
+    <input type="email" id="email" required><br>
+
+    <label for="password">Lösenord:</label>
+    <input type="password" id="password" required><br>
+
+    <button type="submit">Logga in</button>
+    <p>Har du inget konto? <a href="/register.html">Registrera dig här</a></p>
+
+  </form>
+
+  <script>
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
+
+      const res = await fetch('/api/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      if (res.ok) {
+        alert('Inloggning lyckades!');
+        window.location.href = "/admin_panel.html";
+      } else {
+        const msg = await res.text();
+        alert('Fel: ' + msg);
+      }
+    });
+  </script>
+</body>
+</html>
