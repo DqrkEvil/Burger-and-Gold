@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+  <meta charset="UTF-8">
+  <title>Ta bort produkt</title>
+</head>
+<body>
+  <h2>Ta bort produkt</h2>
+  <form id="removeForm">
+    <label for="productId">Produkt-ID:</label>
+    <input type="number" id="productId" required>
+    <button type="submit">Ta bort</button>
+  </form>
+
+  <script>
+    document.getElementById('removeForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const productId = document.getElementById('productId').value;
+
+      const res = await fetch(`/api/products/${productId}`, {
+        method: 'DELETE',
+      });
+
+      if (res.ok) {
+        alert('Produkten har tagits bort!');
+      } else {
+        const msg = await res.text();
+        alert('Fel: ' + msg);
+      }
+    });
+  </script>
+</body>
+</html>
