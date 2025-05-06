@@ -6,12 +6,12 @@ const { Pool } = require('pg');
 const app = express();
 const PORT = 3000;
 
-// PostgreSQL connection
+// PostgreSQL-anslutning
 const pool = new Pool({
-  user: 'postgres',           // Change this if needed
+  user: 'postgres',
   host: 'localhost',
   database: 'burgerngold',
-  password: 'majd1324', // Replace with your password
+  password: 'majd1324', // byt vid behov
   port: 5432,
 });
 
@@ -19,79 +19,40 @@ const pool = new Pool({
 app.use(express.json());
 app.use(express.static(path.join(__dirname, '../public')));
 
-// Root route
+// Root
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
-// API ROUTES
+
+// ✅ GET – Hämta alla produkter
 app.get('/api/products', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM products');
     res.json(result.rows);
   } catch (err) {
     console.error(err);
-    res.status(500).send('Error fetching products');
+    res.status(500).send('Fel vid hämtning av produkter');
   }
 });
 
-app.get('/api/orders', async (req, res) => {
-  try {
-    const result = await pool.query('SELECT * FROM orders');
-    res.json(result.rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Error fetching orders');
-  }
-});
-
-app.get('/api/users', async (req, res) => {
-  try {
-    const result = await pool.query('SELECT * FROM users');
-    res.json(result.rows);
-  } catch (err) {
-    console.error(err);
-    res.status(500).send('Error fetching users');
-  }
-});
-
-// Get local IP
-function getLocalIP() {
-  const interfaces = os.networkInterfaces();
-  for (const iface of Object.values(interfaces)) {
-    for (const config of iface) {
-      if (config.family === 'IPv4' && !config.internal) {
-        return config.address;
-      }
-    }
-  }
-  return 'localhost';
-}
-
-// Start server
-app.listen(PORT, () => {
-  const ip = getLocalIP();
-  console.log(`Server is running at:
-  → Local:   http://localhost:${PORT}
-  → Network: http://${ip}:${PORT}`);
-});
-
-
+// ✅ POST – Lägg till ny produkt (inkl. bild-URL)
 app.post('/api/products', async (req, res) => {
-  const { name, price, info } = req.body;
+  const { name, price, info, image } = req.body;
 
   try {
     const result = await pool.query(
-      'INSERT INTO products (name, price, info) VALUES ($1, $2, $3) RETURNING *',
-      [name, price, info]
+      'INSERT INTO products (name, price, info, image) VALUES ($1, $2, $3, $4) RETURNING *',
+      [name, price, info, image]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
-    console.error('Fel vid produktinläggning:', err);
+    console.error('Fel vid tillägg:', err);
     res.status(500).send('Kunde inte lägga till produkt');
   }
 });
 
+// ✅ DELETE – Ta bort produkt med ID
 app.delete('/api/products/:id', async (req, res) => {
   const { id } = req.params;
 
@@ -109,28 +70,29 @@ app.delete('/api/products/:id', async (req, res) => {
   }
 });
 
-app.put('/api/products/:id', async (req, res) => {
-  const { id } = req.params;
-  const { price } = req.body;
-
+// ✅ GET – Hämta alla ordrar
+app.get('/api/orders', async (req, res) => {
   try {
-    const result = await pool.query(
-      'UPDATE products SET price = $1 WHERE id = $2 RETURNING *',
-      [price, id]
-    );
-
-    if (result.rowCount === 0) {
-      return res.status(404).send('Ingen produkt hittades med det ID:t');
-    }
-
-    res.status(200).json({ message: 'Pris uppdaterat', product: result.rows[0] });
+    const result = await pool.query('SELECT * FROM orders');
+    res.json(result.rows);
   } catch (err) {
-    console.error('Fel vid prisuppdatering:', err);
-    res.status(500).send('Kunde inte uppdatera pris');
+    console.error(err);
+    res.status(500).send('Error fetching orders');
   }
 });
 
+// ✅ GET – Hämta alla användare
+app.get('/api/users', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT * FROM users');
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Error fetching users');
+  }
+});
 
+// ✅ POST – Inloggning
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -144,7 +106,6 @@ app.post('/api/login', async (req, res) => {
       return res.status(401).send('Fel e-post eller lösenord');
     }
 
-    // Inloggning lyckades
     res.status(200).json({ message: 'Inloggad', user: result.rows[0] });
   } catch (err) {
     console.error('Fel vid inloggning:', err);
@@ -152,6 +113,7 @@ app.post('/api/login', async (req, res) => {
   }
 });
 
+// ✅ POST – Registrering
 app.post('/api/register', async (req, res) => {
   const { name, email, password, nummer, address, city, postal_code } = req.body;
 
@@ -172,4 +134,25 @@ app.post('/api/register', async (req, res) => {
     console.error('Fel vid registrering:', err);
     res.status(500).send('Serverfel vid registrering');
   }
+});
+
+// 🖥️ Lokal IP-visning
+function getLocalIP() {
+  const interfaces = os.networkInterfaces();
+  for (const iface of Object.values(interfaces)) {
+    for (const config of iface) {
+      if (config.family === 'IPv4' && !config.internal) {
+        return config.address;
+      }
+    }
+  }
+  return 'localhost';
+}
+
+// Starta server
+app.listen(PORT, () => {
+  const ip = getLocalIP();
+  console.log(`Server is running at:
+  → Local:   http://localhost:${PORT}
+  → Network: http://${ip}:${PORT}`);
 });
