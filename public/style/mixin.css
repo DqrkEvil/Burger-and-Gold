@@ -1,0 +1,23 @@
+nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+footer {
+  background-color: #191919;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 40px;
+  font-size: 14px;
+}
+footer .footer_col {
+  margin-bottom: 20px;
+  min-width: 150px;
+}/*# sourceMappingURL=mixin.css.map */

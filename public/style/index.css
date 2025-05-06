@@ -12,16 +12,6 @@ header {
   background-color: #151515;
   position: relative;
 }
-nav {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-nav a {
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-}
 .menu_toggle {
   display: none;
   flex-direction: column;
@@ -166,22 +156,6 @@ button[type="submit"] {
   border-radius: 5px;
   cursor: pointer;
 }
-footer {
-  background-color: #191919;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  padding: 40px 20px;
-  font-size: 14px;
-  color: white;
-  gap: 20px;
-}
-
-.footer_col {
-  flex: 1 1 150px;
-  min-width: 120px;
-}
-
 
 
 
