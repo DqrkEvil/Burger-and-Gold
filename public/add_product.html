@@ -1,51 +1,56 @@
 <!DOCTYPE html>
 <html lang="sv">
-<head>
-  <meta charset="UTF-8">
-  <title>Lägg till produkt</title>
-</head>
-<body>
-  <h2>Lägg till produkt</h2>
-  <form id="productForm">
-    <label for="name">Namn:</label>
-    <input type="text" id="name" required><br>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Lägg till produkt</title>
+        <link rel="stylesheet" href="style/add_product.css">
+    </head>
+    <body>
 
-    <label for="price">Pris:</label>
-    <input type="number" id="price" required><br>
+        <form id="productForm">
+            <h2>Lägg till produkt</h2>
 
-    <label for="info">Info:</label>
-    <input type="text" id="info"><br>
+            <label for="name">Namn:</label>
+            <input type="text" id="name" required />
 
-    <label for="image">Bild-URL:</label>
-    <input type="text" id="image" required><br>
+            <label for="price">Pris:</label>
+            <input type="number" id="price" required />
 
-    <button type="submit">Skicka</button>
-  </form>
+            <label for="info">Info:</label>
+            <input type="text" id="info" />
 
-  <script>
-    document.getElementById('productForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
+            <label for="image">Bild-URL:</label>
+            <input type="text" id="image" required />
 
-      const product = {
-        name: document.getElementById('name').value,
-        price: document.getElementById('price').value,
-        info: document.getElementById('info').value,
-        image: document.getElementById('image').value
-      };
+            <button type="submit">Lägg till</button>
+        </form>
 
-      const res = await fetch('/api/products', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(product)
-      });
+        <script>
+            document
+                .getElementById("productForm")
+                .addEventListener("submit", async (e) => {
+                    e.preventDefault();
 
-      if (res.ok) {
-        alert('Produkt tillagd!');
-        e.target.reset();
-      } else {
-        alert('Fel vid tillägg');
-      }
-    });
-  </script>
-</body>
+                    const product = {
+                        name: document.getElementById("name").value,
+                        price: document.getElementById("price").value,
+                        info: document.getElementById("info").value,
+                        image: document.getElementById("image").value,
+                    };
+
+                    const res = await fetch("/api/products", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(product),
+                    });
+
+                    if (res.ok) {
+                        alert("Produkt tillagd!");
+                        e.target.reset();
+                    } else {
+                        alert("Fel vid tillägg");
+                    }
+                });
+        </script>
+    </body>
 </html>
