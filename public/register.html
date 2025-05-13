@@ -39,7 +39,7 @@
 
       if (res.ok) {
         alert('Registrering lyckades!');
-        window.location.href = '/login.html';
+        window.location.href = '/user_panel.html';
       } else {
         const msg = await res.text();
         alert('Fel: ' + msg);

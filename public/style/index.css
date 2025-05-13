@@ -36,7 +36,7 @@ header {
   border-left: 2px solid gold;
   transition: right 0.3s ease-in-out;
   display: flex; /* always flex, animation handles visibility */
-  z-index: 1000;
+  z-index: 2000;
 }
 
 .mobile_nav a {

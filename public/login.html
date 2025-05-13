@@ -19,28 +19,37 @@
   </form>
 
   <script>
-    document.getElementById('loginForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
+  document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    e.preventDefault();
 
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
 
-      const res = await fetch('/api/login', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ email, password })
-      });
+    const res = await fetch('/api/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ email, password })
+    });
 
-      if (res.ok) {
-        alert('Inloggning lyckades!');
+    if (res.ok) {
+      const data = await res.json(); // Vi förväntar oss ett svar som innehåller "role"
+
+      alert('Inloggning lyckades!');
+
+      if (data.role && data.role.toLowerCase() === 'admin') {
         window.location.href = "/admin_panel.html";
       } else {
-        const msg = await res.text();
-        alert('Fel: ' + msg);
+        window.location.href = "/user_panel.html";
       }
-    });
-  </script>
+    } else {
+      const msg = await res.text();
+      alert('Fel: ' + msg);
+    }
+  });
+</script>
+
+
 </body>
 </html>

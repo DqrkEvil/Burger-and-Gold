@@ -25,7 +25,7 @@ app.get('/', (req, res) => {
 });
 
 
-// ✅ GET – Hämta alla produkter
+// GET – Hämta alla produkter
 app.get('/api/products', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM products');
@@ -36,7 +36,7 @@ app.get('/api/products', async (req, res) => {
   }
 });
 
-// ✅ POST – Lägg till ny produkt (inkl. bild-URL)
+// POST – Lägg till ny produkt (inkl. bild-URL)
 app.post('/api/products', async (req, res) => {
   const { name, price, info, image } = req.body;
 
@@ -52,7 +52,7 @@ app.post('/api/products', async (req, res) => {
   }
 });
 
-// ✅ DELETE – Ta bort produkt med ID
+// DELETE – Ta bort produkt med ID
 app.delete('/api/products/:id', async (req, res) => {
   const { id } = req.params;
 
@@ -70,7 +70,7 @@ app.delete('/api/products/:id', async (req, res) => {
   }
 });
 
-// ✅ GET – Hämta alla ordrar
+// GET – Hämta alla ordrar
 app.get('/api/orders', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM orders');
@@ -81,7 +81,7 @@ app.get('/api/orders', async (req, res) => {
   }
 });
 
-// ✅ GET – Hämta alla användare
+// GET – Hämta alla användare
 app.get('/api/users', async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM users');
@@ -92,7 +92,7 @@ app.get('/api/users', async (req, res) => {
   }
 });
 
-// ✅ POST – Inloggning
+// POST – Inloggning
 app.post('/api/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -106,14 +106,23 @@ app.post('/api/login', async (req, res) => {
       return res.status(401).send('Fel e-post eller lösenord');
     }
 
-    res.status(200).json({ message: 'Inloggad', user: result.rows[0] });
+    const user = result.rows[0];
+
+    // Endast returnera det du vill använda
+    res.status(200).json({
+      message: 'Inloggad',
+      role: user.role,      // 👈 Det här behövs för admin redirect
+      name: user.name,      // valfritt
+      email: user.email     // valfritt
+    });
+
   } catch (err) {
     console.error('Fel vid inloggning:', err);
     res.status(500).send('Serverfel vid inloggning');
   }
 });
 
-// ✅ POST – Registrering
+// POST – Registrering
 app.post('/api/register', async (req, res) => {
   const { name, email, password, nummer, address, city, postal_code } = req.body;
 
@@ -136,7 +145,7 @@ app.post('/api/register', async (req, res) => {
   }
 });
 
-// 🖥️ Lokal IP-visning
+//  Lokal IP-visning
 function getLocalIP() {
   const interfaces = os.networkInterfaces();
   for (const iface of Object.values(interfaces)) {
