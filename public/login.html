@@ -3,54 +3,56 @@
 <head>
   <meta charset="UTF-8">
   <title>Logga in</title>
-    <link rel="shortcut icon" href="media/favicon.png" type="png">
+  <link rel="shortcut icon" href="media/favicon.png" type="image/png">
 </head>
 <body>
   <h2>Logga in</h2>
   <form id="loginForm">
     <label for="email">E-post:</label>
-    <input type="email" id="email" required><br>
+    <input type="email" id="email" name="email" required><br>
 
     <label for="password">Lösenord:</label>
-    <input type="password" id="password" required><br>
+    <input type="password" id="password" name="password" required><br>
 
     <button type="submit">Logga in</button>
     <p>Har du inget konto? <a href="/register.html">Registrera dig här</a></p>
-
   </form>
 
   <script>
-  document.getElementById('loginForm').addEventListener('submit', async (e) => {
-    e.preventDefault();
+    document.getElementById('loginForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
 
-    const email = document.getElementById('email').value;
-    const password = document.getElementById('password').value;
+      const email = document.getElementById('email').value;
+      const password = document.getElementById('password').value;
 
-    const res = await fetch('/api/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ email, password })
-    });
+      try {
+        const res = await fetch('/api/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ email, password }),
+          credentials: 'same-origin' // 👈 Viktigt för att skicka cookies (session)
+        });
 
-    if (res.ok) {
-      const data = await res.json(); // Vi förväntar oss ett svar som innehåller "role"
+        if (res.ok) {
+          const data = await res.json();
+          alert('Inloggning lyckades!');
 
-      alert('Inloggning lyckades!');
-
-      if (data.role && data.role.toLowerCase() === 'admin') {
-        window.location.href = "/admin_panel.html";
-      } else {
-        window.location.href = "/user_panel.html";
+          if (data.role && data.role.toLowerCase() === 'admin') {
+            window.location.href = "/admin_panel.html";
+          } else {
+            window.location.href = "/user_panel";
+          }
+        } else {
+          const msg = await res.text();
+          alert('Fel: ' + msg);
+        }
+      } catch (error) {
+        console.error('Nätverksfel:', error);
+        alert('Något gick fel. Försök igen senare.');
       }
-    } else {
-      const msg = await res.text();
-      alert('Fel: ' + msg);
-    }
-  });
-</script>
-
-
+    });
+  </script>
 </body>
 </html>

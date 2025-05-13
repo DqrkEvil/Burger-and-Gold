@@ -3,103 +3,98 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Burger & Gold</title>
-  <link rel="stylesheet" href="style/index.css">
+  <title>Adminpanel – Burger & Gold</title>
+  <link rel="stylesheet" href="/style/index.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="shortcut icon" href="media/favicon.png" type="png">
+  <link rel="shortcut icon" href="/media/favicon.png" type="image/png">
 </head>
 
 <body>
   <!-- Översta menyn -->
   <div class="topbar">
     <div class="topbar-content">
-      <button class="mina-sidor-btn">
+      <span id="adminName" style="color: gold; font-weight: bold;"></span>
+      <button class="mina-sidor-btn" onclick="window.location.href='/user_panel'">
         <i class="fas fa-user" style="margin-right: 6px;"></i> Mina sidor
+      </button>
+      <button class="mina-sidor-btn" onclick="window.location.href='/logout'">
+        <i class="fas fa-right-from-bracket" style="margin-right: 6px;"></i> Logga ut
       </button>
     </div>
   </div>
 
   <!-- Huvudmeny -->
   <header>
-
-    
     <div style="color: gold;">BURGER & GOLD</div>
-
     <nav id="nav_links">
       <a href="/index.html">Hem</a>
       <a href="/product_menu.html">Meny</a>
-      <a href="/checkout.html">
+      <a href="/checkout">
         <i class="fas fa-shopping-cart" style="font-size: 24px;"></i>
       </a>
     </nav>
-
     <div class="menu_toggle" id="mobile_menu">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </div>
-
     <div class="mobile_nav" id="mobile_nav">
-      <button id="close_mobile_nav" style="align-self: flex-end; background: none; border: none; color: white; font-size: 24px; cursor: pointer;">✖</button>
+      <button id="close_mobile_nav">✖</button>
       <a href="/index.html">Hem</a>
       <a href="/product_menu.html">Meny</a>
-      <a href="/checkout.html">
-        <i class="fas fa-shopping-cart" style="font-size: 24px;"></i>
-      </a>
+      <a href="/checkout"><i class="fas fa-shopping-cart" style="font-size: 24px;"></i></a>
     </div>
   </header>
 
-
-  <!-- Signaturrätter -->
+  <!-- Adminpanel -->
   <section class="section">
     <h2 style="color: gold;">Administratörspanel</h2>
-
     <div class="cards">
       <div class="card">
-        <img src="media/addprod.png" alt="">
+        <img src="/media/addprod.png" alt="">
         <h3>Lägg till produkter</h3>
         <p>Lägger till produkter i menyn</p>
-        <a href="/add_product.html" class="button">Lägg produkter</a>
+        <a href="/add_product" class="button">Lägg produkter</a>
       </div>
-
       <div class="card">
-        <img src="media/removeprod.png" alt="">
-        <h3>Tabort  produkter</h3>
-        <p>Tarbort produkter i menyn</p>
-        <a href="/remove_product.html" class="button">Ta bort produkter</a>
+        <img src="/media/removeprod.png" alt="">
+        <h3>Ta bort produkter</h3>
+        <p>Tar bort produkter i menyn</p>
+        <a href="/remove_product" class="button">Ta bort produkter</a>
       </div>
-
       <div class="card">
-        <img src="media/ändraprisprod.png" alt="">
+        <img src="/media/ändraprisprod.png" alt="">
         <h3>Ändra priser</h3>
-        <p>Ändrar produkt priser i menyn</p>
-        <a href="/update_price.html" class="button">Ändra pris</a>
+        <p>Ändrar produktpriser i menyn</p>
+        <a href="/update_price" class="button">Ändra pris</a>
       </div>
-
       <div class="card">
-        <img src="media/beställninghistorik.png" alt="">
+        <img src="/media/beställninghistorik.png" alt="">
         <h3>Historik</h3>
         <p>Kollar på gamla beställningar</p>
         <a href="#" class="button">Kolla på historik</a>
       </div>
-
       <div class="card">
-        <img src="media/aktivabestäningar.png" alt="">
+        <img src="/media/aktivabestäningar.png" alt="">
         <h3>Aktiva beställningar</h3>
         <p>Kollar på aktiva beställningar</p>
         <a href="#" class="button">Kolla på aktiva beställningar</a>
       </div>
-
-
     </div>
   </section>
 
-
-
-
-
-  <!-- JavaScript för mobilmeny -->
+  <!-- JavaScript -->
   <script>
+    // Hämta sessionsanvändare (frivillig: du kan också visa namn direkt från sessionsdata på serversidan)
+    fetch('/api/users', { credentials: 'same-origin' })
+      .then(res => res.json())
+      .then(users => {
+        // valfritt sätt – i riktigt system hämtar man sessionsinfo direkt via en egen /api/me-route
+        document.getElementById('adminName').textContent = "Adminpanel";
+      })
+      .catch(() => {
+        document.getElementById('adminName').textContent = "Admin";
+      });
+
+    // Mobilmeny
     const mobileMenu = document.getElementById('mobile_menu');
     const mobileNav = document.getElementById('mobile_nav');
     const closeBtn = document.getElementById('close_mobile_nav');
@@ -112,6 +107,5 @@
       mobileNav.classList.remove("active");
     });
   </script>
-
 </body>
 </html>
