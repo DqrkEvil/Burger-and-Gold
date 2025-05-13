@@ -9,6 +9,38 @@
   <link rel="shortcut icon" href="media/favicon.png" type="png">
 </head>
 <body>
+    <!-- Översta menyn -->
+
+  <!-- Huvudmeny -->
+  <header>
+
+    
+    <div style="color: gold;"><img src="media/favicon.png" alt="" width="60px" height="auto"></div>
+
+    <nav id="nav_links" >
+      <a href="index.html" style="color: gold; font-size: larger;">Hem</a>
+      <a href="product_menu.html" style="color: gold;font-size: larger;">Meny</a>
+      <a href="checkout.html" style="color: gold;">
+        <i class="fas fa-shopping-cart" style="font-size: 24px;color: gold; font-size: larger;"></i>
+      </a>
+    </nav>
+
+    <div class="menu_toggle" id="mobile_menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+
+    <div class="mobile_nav" id="mobile_nav">
+      <button id="close_mobile_nav" style="align-self: flex-end; background: none; border: none; color: white; font-size: 24px; cursor: pointer;">✖</button>
+      <a href="index.html" style="color: gold;">Hem</a>
+      <a href="product_menu.html" style="color: gold;">Meny</a>
+      <a href="checkout.html">
+        <i class="fas fa-shopping-cart" style="font-size: 24px; color: gold;"></i>
+      </a>
+    </div>
+  </header>
+
   <h2>Logga in</h2>
   <form id="loginForm">
     <label for="email">E-post:</label>
@@ -55,6 +87,19 @@
         console.error('Nätverksfel:', error);
         alert('Något gick fel. Försök igen senare.');
       }
+    });
+
+
+    const mobileMenu = document.getElementById('mobile_menu');
+    const mobileNav = document.getElementById('mobile_nav');
+    const closeBtn = document.getElementById('close_mobile_nav');
+
+    mobileMenu.addEventListener("click", () => {
+      mobileNav.classList.toggle("active");
+    });
+
+    closeBtn.addEventListener("click", () => {
+      mobileNav.classList.remove("active");
     });
   </script>
 </body>

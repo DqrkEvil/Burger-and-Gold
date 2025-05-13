@@ -133,7 +133,7 @@ app.get('/api/orders', async (req, res) => {
   }
 });
 
-app.get('/api/users', async (req, res) => {
+app.get('/api/users', isAuthenticated, isAdmin, async (req, res) => {
   try {
     const result = await pool.query('SELECT * FROM users');
     res.json(result.rows);
@@ -211,6 +211,16 @@ app.post('/api/register', async (req, res) => {
     res.status(500).send('Serverfel vid registrering');
   }
 });
+
+// GET – Hämta inloggad användare
+app.get('/api/me', (req, res) => {
+  if (req.session.user) {
+    res.json(req.session.user);
+  } else {
+    res.status(401).send('Inte inloggad');
+  }
+});
+
 
 // IP-funktion
 function getLocalIP() {

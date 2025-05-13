@@ -14,8 +14,8 @@
   <!-- Översta menyn -->
   <div class="topbar">
     <div class="topbar-content">
-      <span id="adminName" style="color: gold; font-weight: bold;"></span>
-      <button class="mina-sidor-btn" onclick="window.location.href='/user_panel'">
+
+      <button class="mina-sidor-btn" onclick="window.location.href='/user_panel'" style="margin-right: 10px;">
         <i class="fas fa-user" style="margin:5px; border-radius: 10%;"></i> Mina sidor
       </button>
       <button class="mina-sidor-btn" onclick="window.location.href='/logout'">
@@ -26,27 +26,37 @@
 
   <!-- Huvudmeny -->
   <header>
-    <div style="color: gold;">BURGER & GOLD</div>
-    <nav id="nav_links">
-      <a href="/index.html">Hem</a>
-      <a href="/product_menu.html">Meny</a>
-      <a href="/checkout">
-        <i class="fas fa-shopping-cart" style="font-size: 24px;"></i>
+
+    
+    <div style="color: gold;"><img src="media/favicon.png" alt="" width="60px" height="auto"></div>
+
+    <nav id="nav_links" >
+      <a href="index.html" style="color: gold; font-size: larger;">Hem</a>
+      <a href="product_menu.html" style="color: gold;font-size: larger;">Meny</a>
+      <a href="checkout.html" style="color: gold;">
+        <i class="fas fa-shopping-cart" style="font-size: 24px;color: gold; font-size: larger;"></i>
       </a>
     </nav>
+
     <div class="menu_toggle" id="mobile_menu">
-      <span></span><span></span><span></span>
+      <span></span>
+      <span></span>
+      <span></span>
     </div>
+
     <div class="mobile_nav" id="mobile_nav">
-      <button id="close_mobile_nav">✖</button>
-      <a href="/index.html">Hem</a>
-      <a href="/product_menu.html">Meny</a>
-      <a href="/checkout"><i class="fas fa-shopping-cart" style="font-size: 24px;"></i></a>
+      <button id="close_mobile_nav" style="align-self: flex-end; background: none; border: none; color: white; font-size: 24px; cursor: pointer;">✖</button>
+      <a href="index.html" style="color: gold;">Hem</a>
+      <a href="product_menu.html" style="color: gold;">Meny</a>
+      <a href="checkout.html">
+        <i class="fas fa-shopping-cart" style="font-size: 24px; color: gold;"></i>
+      </a>
     </div>
   </header>
 
   <!-- Adminpanel -->
   <section class="section">
+          <span id="adminName" style="color: gold; font-weight: bold;"></span>
     <h2 style="color: gold;">Administratörspanel</h2>
     <div class="cards">
       <div class="card">
@@ -84,16 +94,19 @@
 
   <!-- JavaScript -->
   <script>
-    // Hämta sessionsanvändare (frivillig: du kan också visa namn direkt från sessionsdata på serversidan)
-    fetch('/api/users', { credentials: 'same-origin' })
-      .then(res => res.json())
-      .then(users => {
-        // valfritt sätt – i riktigt system hämtar man sessionsinfo direkt via en egen /api/me-route
-        document.getElementById('adminName').textContent = "Adminpanel";
-      })
-      .catch(() => {
-        document.getElementById('adminName').textContent = "Admin";
-      });
+// Hämta nuvarande inloggad användare (admin)
+fetch('/api/me', { credentials: 'same-origin' })
+  .then(res => {
+    if (!res.ok) throw new Error("Inte inloggad");
+    return res.json();
+  })
+  .then(user => {
+    document.getElementById('adminName').textContent = "Välkommen, " + user.name ;
+  })
+  .catch(() => {
+    document.getElementById('adminName').textContent = "Ej inloggad";
+  });
+
 
     // Mobilmeny
     const mobileMenu = document.getElementById('mobile_menu');
@@ -107,6 +120,8 @@
     closeBtn.addEventListener("click", () => {
       mobileNav.classList.remove("active");
     });
+
+    
   </script>
 </body>
 </html>
