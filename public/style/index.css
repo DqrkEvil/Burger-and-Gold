@@ -1,6 +1,8 @@
+@import url('https://fonts.googleapis.com/css2?family=Cal+Sans&display=swap');
+
 body {
     margin: 0;
-    font-family: "Georgia", serif;
+    font-family: "Cal Sans", sans-serif;
     background-color: #151515;
     color: white;
 }
@@ -23,26 +25,25 @@ header {
     align-items: center;
     text-align: center;
     padding: 0 20px;
+    font-size: 1.35vw;
 }
 .hero h1 {
-    font-size: 48px;
+    font-size: 6vw;
     margin-bottom: 20px;
     color: rgb(255, 255, 255);
-    text-shadow: 0 0 5px #ffd700, 0 0 10px #ffcc00, 0 0 20px #ffcc00,
-        0 0 30px #ffaa00;
+    text-shadow: 0 0 5px #000000
 }
 .hero p {
     max-width: 600px;
     margin-bottom: 20px;
-    text-shadow: 0 0 5px #ffd700, 0 0 10px #ffcc00, 0 0 20px #ffcc00,
-        0 0 30px #ffaa00;
+    text-shadow: 0 0 5px #000000
 }
 .button {
     background-color: gold;
     color: black;
     border: none;
-    padding: 12px 24px;
-    font-size: 18px;
+    padding: 1% 2%;
+    font-size: 1.5vw;
     cursor: pointer;
     text-decoration: none;
     border-radius: 5px;
