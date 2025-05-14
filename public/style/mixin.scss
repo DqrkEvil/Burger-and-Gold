@@ -1,5 +1,4 @@
 @mixin navbar {
-
     display: flex;
     align-items: center;
     gap: 20px;
@@ -9,15 +8,14 @@
         text-decoration: none;
         font-size: 16px;
     }
-
 }
 @mixin mobile_navbar {
     nav {
         display: none;
-    }      
+    }
     .menu_toggle {
         display: flex;
-    }      
+    }
     .hero {
         height: auto;
         padding: 60px 20px;
@@ -44,7 +42,6 @@
         width: 90%;
         margin: auto;
     }
-        
 }
 
 @mixin footer {
@@ -68,46 +65,46 @@
         text-align: center;
         gap: 20px;
         padding: 30px 10px;
-      }
-    
+    }
+
     .footer_col {
         flex: 1 1 45%;
         min-width: 150px;
         margin-bottom: 20px;
     }
-    
+
     footer iframe {
         width: 100%;
         height: 150px;
     }
-    
+
     .button {
         width: 100%;
         max-width: 300px;
     }
-    
+
     .topbar {
         padding: 8px 20px;
         justify-content: end;
     }
 }
-    
-    .fullwidth-map {
-      width: 100vw;
-      height: 200px;
-      margin: 0;
-      padding: 0;
-      overflow: hidden;
-    }
-    
-    .fullwidth-map iframe {
-      border: 0;
-      width: 100%;
-      height: 100%;
-      display: block;
+
+.fullwidth-map {
+    width: 100vw;
+    height: 200px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
-@mixin menu_toggle{
+.fullwidth-map iframe {
+    border: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+@mixin menu_toggle {
     display: none;
     flex-direction: column;
     cursor: pointer;
@@ -117,9 +114,9 @@
         background: white;
         margin: 4px 0;
         border-radius: 2px;
-      }
+    }
 }
-@mixin mobile_nav{
+@mixin mobile_nav {
     position: fixed;
     top: 0;
     right: -100%;
@@ -138,22 +135,20 @@
         color: white;
         font-size: 18px;
         border-bottom: 1px solid #333;
-      }
+    }
 }
 
-.mobile_nav{
-    @include mobile_nav()
+.mobile_nav {
+    @include mobile_nav();
 }
-.menu_toggle{
+.menu_toggle {
     @include menu_toggle();
 }
 .mobile_nav.active {
     right: 0;
-  }
+}
 
-
-
-nav{
+nav {
     @include navbar;
 }
 

@@ -1,84 +1,130 @@
 <!DOCTYPE html>
 <html lang="sv">
-<head>
-  <meta charset="UTF-8">
-  <title>Registrera konto</title>
-  <link rel="stylesheet" href="style/index.css">
-  <link rel="stylesheet" href="style/mixin.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="shortcut icon" href="media/favicon.png" type="png">
-</head>
-<body>
-    <!-- Huvudmeny -->
-  <header>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Registrera konto</title>
+        <link rel="stylesheet" href="style/index.css" />
+        <link rel="stylesheet" href="style/mixin.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        />
+        <link rel="shortcut icon" href="media/favicon.png" type="png" />
+    </head>
+    <body>
+        <!-- Huvudmeny -->
+        <header>
+            <div style="color: gold">
+                <img
+                    src="media/favicon.png"
+                    alt=""
+                    width="60px"
+                    height="auto"
+                />
+            </div>
 
-    
-    <div style="color: gold;"><img src="media/favicon.png" alt="" width="60px" height="auto"></div>
+            <nav id="nav_links">
+                <a href="index.html" style="color: gold; font-size: larger"
+                    >Hem</a
+                >
+                <a
+                    href="product_menu.html"
+                    style="color: gold; font-size: larger"
+                    >Meny</a
+                >
+                <a href="checkout.html" style="color: gold">
+                    <i
+                        class="fas fa-shopping-cart"
+                        style="font-size: 24px; color: gold; font-size: larger"
+                    ></i>
+                </a>
+            </nav>
 
-    <nav id="nav_links" >
-      <a href="index.html" style="color: gold; font-size: larger;">Hem</a>
-      <a href="product_menu.html" style="color: gold;font-size: larger;">Meny</a>
-      <a href="checkout.html" style="color: gold;">
-        <i class="fas fa-shopping-cart" style="font-size: 24px;color: gold; font-size: larger;"></i>
-      </a>
-    </nav>
+            <div class="menu_toggle" id="mobile_menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
 
-    <div class="menu_toggle" id="mobile_menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+            <div class="mobile_nav" id="mobile_nav">
+                <button
+                    id="close_mobile_nav"
+                    style="
+                        align-self: flex-end;
+                        background: none;
+                        border: none;
+                        color: white;
+                        font-size: 24px;
+                        cursor: pointer;
+                    "
+                >
+                    ✖
+                </button>
+                <a href="index.html" style="color: gold">Hem</a>
+                <a href="product_menu.html" style="color: gold">Meny</a>
+                <a href="checkout.html">
+                    <i
+                        class="fas fa-shopping-cart"
+                        style="font-size: 24px; color: gold"
+                    ></i>
+                </a>
+            </div>
+        </header>
 
-    <div class="mobile_nav" id="mobile_nav">
-      <button id="close_mobile_nav" style="align-self: flex-end; background: none; border: none; color: white; font-size: 24px; cursor: pointer;">✖</button>
-      <a href="index.html" style="color: gold;">Hem</a>
-      <a href="product_menu.html" style="color: gold;">Meny</a>
-      <a href="checkout.html">
-        <i class="fas fa-shopping-cart" style="font-size: 24px; color: gold;"></i>
-      </a>
-    </div>
-  </header>
+        <h2>Registrera dig</h2>
+        <form id="registerForm">
+            <label>Namn: <input type="text" id="name" required /></label><br />
+            <label>E-post: <input type="email" id="email" required /></label
+            ><br />
+            <label
+                >Lösenord:
+                <input type="password" id="password" required /></label
+            ><br />
+            <label
+                >Telefonnummer:
+                <input type="text" id="nummer" required /></label
+            ><br />
+            <label>Adress: <input type="text" id="address" required /></label
+            ><br />
+            <label>Stad: <input type="text" id="city" required /></label><br />
+            <label
+                >Postnummer:
+                <input type="text" id="postal_code" required /></label
+            ><br />
+            <button type="submit">Skapa konto</button>
+        </form>
 
-  <h2>Registrera dig</h2>
-  <form id="registerForm">
-    <label>Namn: <input type="text" id="name" required></label><br>
-    <label>E-post: <input type="email" id="email" required></label><br>
-    <label>Lösenord: <input type="password" id="password" required></label><br>
-    <label>Telefonnummer: <input type="text" id="nummer" required></label><br>
-    <label>Adress: <input type="text" id="address" required></label><br>
-    <label>Stad: <input type="text" id="city" required></label><br>
-    <label>Postnummer: <input type="text" id="postal_code" required></label><br>
-    <button type="submit">Skapa konto</button>
-  </form>
+        <script>
+            document
+                .getElementById("registerForm")
+                .addEventListener("submit", async (e) => {
+                    e.preventDefault();
 
-  <script>
-    document.getElementById('registerForm').addEventListener('submit', async (e) => {
-      e.preventDefault();
+                    const user = {
+                        name: document.getElementById("name").value,
+                        email: document.getElementById("email").value,
+                        password: document.getElementById("password").value,
+                        nummer: document.getElementById("nummer").value,
+                        address: document.getElementById("address").value,
+                        city: document.getElementById("city").value,
+                        postal_code:
+                            document.getElementById("postal_code").value,
+                    };
 
-      const user = {
-        name: document.getElementById('name').value,
-        email: document.getElementById('email').value,
-        password: document.getElementById('password').value,
-        nummer: document.getElementById('nummer').value,
-        address: document.getElementById('address').value,
-        city: document.getElementById('city').value,
-        postal_code: document.getElementById('postal_code').value
-      };
+                    const res = await fetch("/api/register", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(user),
+                    });
 
-      const res = await fetch('/api/register', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(user)
-      });
-
-      if (res.ok) {
-        alert('Registrering lyckades!');
-        window.location.href = '/user_panel';
-      } else {
-        const msg = await res.text();
-        alert('Fel: ' + msg);
-      }
-    });
-  </script>
-</body>
+                    if (res.ok) {
+                        alert("Registrering lyckades!");
+                        window.location.href = "/user_panel";
+                    } else {
+                        const msg = await res.text();
+                        alert("Fel: " + msg);
+                    }
+                });
+        </script>
+    </body>
 </html>

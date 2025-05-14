@@ -1,43 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link rel="stylesheet" href="style/index.css">
-    <link rel="stylesheet" href="style/mixin.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-    <link rel="shortcut icon" href="media/favicon.png" type="png">   
-</head>
-<body>
-      <!-- Huvudmeny -->
-  <header>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+        <link rel="stylesheet" href="style/index.css" />
+        <link rel="stylesheet" href="style/mixin.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        />
+        <link rel="shortcut icon" href="media/favicon.png" type="png" />
+    </head>
+    <body>
+        <!-- Huvudmeny -->
+        <header>
+            <div style="color: gold">
+                <img
+                    src="media/favicon.png"
+                    alt=""
+                    width="60px"
+                    height="auto"
+                />
+            </div>
 
-    
-    <div style="color: gold;"><img src="media/favicon.png" alt="" width="60px" height="auto"></div>
+            <nav id="nav_links">
+                <a href="index.html" style="color: gold; font-size: larger"
+                    >Hem</a
+                >
+                <a
+                    href="product_menu.html"
+                    style="color: gold; font-size: larger"
+                    >Meny</a
+                >
+                <a href="checkout.html" style="color: gold">
+                    <i
+                        class="fas fa-shopping-cart"
+                        style="font-size: 24px; color: gold; font-size: larger"
+                    ></i>
+                </a>
+            </nav>
 
-    <nav id="nav_links" >
-      <a href="index.html" style="color: gold; font-size: larger;">Hem</a>
-      <a href="product_menu.html" style="color: gold;font-size: larger;">Meny</a>
-      <a href="checkout.html" style="color: gold;">
-        <i class="fas fa-shopping-cart" style="font-size: 24px;color: gold; font-size: larger;"></i>
-      </a>
-    </nav>
+            <div class="menu_toggle" id="mobile_menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
 
-    <div class="menu_toggle" id="mobile_menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
-
-    <div class="mobile_nav" id="mobile_nav">
-      <button id="close_mobile_nav" style="align-self: flex-end; background: none; border: none; color: white; font-size: 24px; cursor: pointer;">✖</button>
-      <a href="index.html" style="color: gold;">Hem</a>
-      <a href="product_menu.html" style="color: gold;">Meny</a>
-      <a href="checkout.html">
-        <i class="fas fa-shopping-cart" style="font-size: 24px; color: gold;"></i>
-      </a>
-    </div>
-  </header>
-</body>
+            <div class="mobile_nav" id="mobile_nav">
+                <button
+                    id="close_mobile_nav"
+                    style="
+                        align-self: flex-end;
+                        background: none;
+                        border: none;
+                        color: white;
+                        font-size: 24px;
+                        cursor: pointer;
+                    "
+                >
+                    ✖
+                </button>
+                <a href="index.html" style="color: gold">Hem</a>
+                <a href="product_menu.html" style="color: gold">Meny</a>
+                <a href="checkout.html">
+                    <i
+                        class="fas fa-shopping-cart"
+                        style="font-size: 24px; color: gold"
+                    ></i>
+                </a>
+            </div>
+        </header>
+    </body>
 </html>

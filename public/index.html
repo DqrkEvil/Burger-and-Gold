@@ -1,150 +1,196 @@
 <!DOCTYPE html>
 <html lang="sv">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Burger & Gold</title>
-  <link rel="stylesheet" href="style/index.css">
-  <link rel="stylesheet" href="style/mixin.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="shortcut icon" href="media/favicon.png" type="png">
-</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Burger & Gold</title>
+        <link rel="stylesheet" href="style/index.css" />
+        <link rel="stylesheet" href="style/mixin.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        />
+        <link rel="shortcut icon" href="media/favicon.png" type="png" />
+    </head>
 
-<body>
-  <!-- Översta menyn -->
-  <div class="topbar">
-    <div class="topbar-content">
-      <a href="/login.html" class="mina-sidor-btn">
-        <i class="fas fa-user" style="margin-right: 6px;"></i> Mina sidor
-      </a>
-    </div>
-  </div>
+    <body>
+        <!-- Översta menyn -->
+        <div class="topbar">
+            <div class="topbar-content">
+                <a href="/login.html" class="mina-sidor-btn">
+                    <i class="fas fa-user" style="margin-right: 6px"></i> Mina
+                    sidor
+                </a>
+            </div>
+        </div>
 
-  <!-- Huvudmeny -->
-    <!-- Huvudmeny -->
-  <header>
+        <!-- Huvudmeny -->
+        <!-- Huvudmeny -->
+        <header>
+            <div style="color: gold">
+                <img
+                    src="media/favicon.png"
+                    alt=""
+                    width="60px"
+                    height="auto"
+                />
+            </div>
 
-    
-    <div style="color: gold;"><img src="media/favicon.png" alt="" width="60px" height="auto"></div>
+            <nav id="nav_links">
+                <a href="index.html" style="color: gold; font-size: larger"
+                    >Hem</a
+                >
+                <a
+                    href="product_menu.html"
+                    style="color: gold; font-size: larger"
+                    >Meny</a
+                >
+                <a href="checkout.html" style="color: gold">
+                    <i
+                        class="fas fa-shopping-cart"
+                        style="font-size: 24px; color: gold; font-size: larger"
+                    ></i>
+                </a>
+            </nav>
 
-    <nav id="nav_links" >
-      <a href="index.html" style="color: gold; font-size: larger;">Hem</a>
-      <a href="product_menu.html" style="color: gold;font-size: larger;">Meny</a>
-      <a href="checkout.html" style="color: gold;">
-        <i class="fas fa-shopping-cart" style="font-size: 24px;color: gold; font-size: larger;"></i>
-      </a>
-    </nav>
+            <div class="menu_toggle" id="mobile_menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
 
-    <div class="menu_toggle" id="mobile_menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+            <div class="mobile_nav" id="mobile_nav">
+                <button
+                    id="close_mobile_nav"
+                    style="
+                        align-self: flex-end;
+                        background: none;
+                        border: none;
+                        color: white;
+                        font-size: 24px;
+                        cursor: pointer;
+                    "
+                >
+                    ✖
+                </button>
+                <a href="index.html" style="color: gold">Hem</a>
+                <a href="product_menu.html" style="color: gold">Meny</a>
+                <a href="checkout.html">
+                    <i
+                        class="fas fa-shopping-cart"
+                        style="font-size: 24px; color: gold"
+                    ></i>
+                </a>
+            </div>
+        </header>
 
-    <div class="mobile_nav" id="mobile_nav">
-      <button id="close_mobile_nav" style="align-self: flex-end; background: none; border: none; color: white; font-size: 24px; cursor: pointer;">✖</button>
-      <a href="index.html" style="color: gold;">Hem</a>
-      <a href="product_menu.html" style="color: gold;">Meny</a>
-      <a href="checkout.html">
-        <i class="fas fa-shopping-cart" style="font-size: 24px; color: gold;"></i>
-      </a>
-    </div>
-  </header>
+        <!-- Hjältsektion -->
+        <section class="hero">
+            <h1>Upplev lyx i varje tugga</h1>
+            <p>
+                Unna dig våra hantverksburgare tillverkade med
+                premiumingredienser och avslutade med ätbart bladguld.
+            </p>
+            <a href="../product_menu.html" class="button">Beställ nu!</a>
+        </section>
 
-  <!-- Hjältsektion -->
-  <section class="hero">
-    <h1>Upplev lyx i varje tugga</h1>
-    <p>Unna dig våra hantverksburgare tillverkade med premiumingredienser och avslutade med ätbart bladguld.</p>
-    <a href="../product_menu.html" class="button">Beställ nu!</a>
-  </section>
+        <!-- Signaturrätter -->
+        <section class="section">
+            <h2 style="color: gold">Signaturrätter</h2>
+            <div class="cards">
+                <div class="card">
+                    <img
+                        src="media/burger_home_page.jpg"
+                        alt="The Gold Standard"
+                    />
+                    <h3>The Gold Standard</h3>
+                    <p>Wagyu-nötkött, svart tryffel, bladguld</p>
+                    <p>399:-</p>
+                </div>
 
-  <!-- Signaturrätter -->
-  <section class="section">
-    <h2 style="color: gold;">Signaturrätter</h2>
-    <div class="cards">
-      <div class="card">
-        <img src="media/burger_home_page.jpg" alt="The Gold Standard">
-        <h3>The Gold Standard</h3>
-        <p>Wagyu-nötkött, svart tryffel, bladguld</p>
-        <p>399:-</p>
-      </div>
+                <div class="card">
+                    <img src="media/burger_home_page.jpg" alt="Black Pearl" />
+                    <h3>Black Pearl</h3>
+                    <p>Svart bröd, kaviar, gulddekor</p>
+                    <p>449:-</p>
+                </div>
 
-      <div class="card">
-        <img src="media/burger_home_page.jpg" alt="Black Pearl">
-        <h3>Black Pearl</h3>
-        <p>Svart bröd, kaviar, gulddekor</p>
-        <p>449:-</p>
-      </div>
+                <div class="card">
+                    <img src="media/burger_home_page.jpg" alt="Royal Surf" />
+                    <h3>Royal Surf</h3>
+                    <p>Hummer, brioch med gulddamm</p>
+                    <p>499:-</p>
+                </div>
+            </div>
+        </section>
 
-      <div class="card">
-        <img src="media/burger_home_page.jpg" alt="Royal Surf">
-        <h3>Royal Surf</h3>
-        <p>Hummer, brioch med gulddamm</p>
-        <p>499:-</p>
-      </div>
-    </div>
-  </section>
+        <!-- Information -->
+        <section class="info_section">
+            <div class="info_text">
+                <h2>Vi skapar mästerverk</h2>
+                <p>
+                    Våra mästerkockar kombinerar traditionella tekniker med
+                    innovativa smaker för att skapa den mest exklusiva
+                    burgarupplevelsen i staden.
+                </p>
+                <ul style="list-style: none; padding-left: 0">
+                    <li>🌟 Michelinbelönade — Erkänd excellens</li>
+                    <li>🌿 Premiumingredienser — Lokalt producerade</li>
+                </ul>
+            </div>
+            <div class="info_image">
+                <img
+                    src="media/burger_home_page.jpg"
+                    alt="Lyxig restauranginteriör"
+                />
+            </div>
+        </section>
 
-  <!-- Information -->
-  <section class="info_section">
-    <div class="info_text">
-      <h2>Vi skapar mästerverk</h2>
-      <p>Våra mästerkockar kombinerar traditionella tekniker med innovativa smaker för att skapa den mest exklusiva burgarupplevelsen i staden.</p>
-      <ul style="list-style:none; padding-left:0;">
-        <li>🌟 Michelinbelönade — Erkänd excellens</li>
-        <li>🌿 Premiumingredienser — Lokalt producerade</li>
-      </ul>
-    </div>
-    <div class="info_image">
-      <img src="media/burger_home_page.jpg" alt="Lyxig restauranginteriör">
-    </div>
-  </section>
+        <!-- Sidfot -->
+        <footer style="color: gold">
+            <div class="footer_col">
+                <h4>Burger & Gold</h4>
+                <p>Vi höjer nivån på lyxig matupplevelse</p>
+            </div>
+            <div class="footer_col">
+                <h4>Öppettider</h4>
+                <p>Mån-Tors: 16:00-23:00</p>
+                <p>Fre-Sön: 17:00-21:00</p>
+            </div>
+            <div class="footer_col">
+                <h4>Kontakt</h4>
+                <p>Kronhusgatan 9<br />411 05 Göteborg<br />+46 123456789</p>
+            </div>
 
-  <!-- Sidfot -->
-  <footer style="color: gold;">
-    <div class="footer_col">
-      <h4>Burger & Gold</h4>
-      <p>Vi höjer nivån på lyxig matupplevelse</p>
-    </div>
-    <div class="footer_col">
-      <h4>Öppettider</h4>
-      <p>Mån-Tors: 16:00-23:00</p>
-      <p>Fre-Sön: 17:00-21:00</p>
-    </div>
-    <div class="footer_col">
-      <h4>Kontakt</h4>
-      <p>Kronhusgatan 9<br>411 05 Göteborg<br>+46 123456789</p>
+            <div class="footer_col">
+                <h4>Följ oss</h4>
+                <p>Instagram | Facebook | X</p>
+            </div>
+            <!-- Karta i fullbredd -->
+            <div class="fullwidth-map">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2136.658586920105!2d11.9578696!3d57.7072586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464ff36d2fca13a1%3A0x419e7db7b139e6c!2sKronhusgatan%209%2C%20411%2005%20G%C3%B6teborg!5e0!3m2!1ssv!2sse!4v1714828856113!5m2!1ssv!2sse"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                >
+                </iframe>
+            </div>
+        </footer>
 
-    </div>
-    
-    <div class="footer_col">
-      <h4>Följ oss</h4>
-      <p>Instagram | Facebook | X</p>
-    </div>
-    <!-- Karta i fullbredd -->
-<div class="fullwidth-map">
-  <iframe
-    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2136.658586920105!2d11.9578696!3d57.7072586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464ff36d2fca13a1%3A0x419e7db7b139e6c!2sKronhusgatan%209%2C%20411%2005%20G%C3%B6teborg!5e0!3m2!1ssv!2sse!4v1714828856113!5m2!1ssv!2sse"
-    allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-  </iframe>
-</div>
+        <!-- JavaScript för mobilmeny -->
+        <script>
+            const mobileMenu = document.getElementById("mobile_menu");
+            const mobileNav = document.getElementById("mobile_nav");
+            const closeBtn = document.getElementById("close_mobile_nav");
 
-  </footer>
+            mobileMenu.addEventListener("click", () => {
+                mobileNav.classList.toggle("active");
+            });
 
-  <!-- JavaScript för mobilmeny -->
-  <script>
-    const mobileMenu = document.getElementById('mobile_menu');
-    const mobileNav = document.getElementById('mobile_nav');
-    const closeBtn = document.getElementById('close_mobile_nav');
-
-    mobileMenu.addEventListener("click", () => {
-      mobileNav.classList.toggle("active");
-    });
-
-    closeBtn.addEventListener("click", () => {
-      mobileNav.classList.remove("active");
-    });
-  </script>
-
-</body>
+            closeBtn.addEventListener("click", () => {
+                mobileNav.classList.remove("active");
+            });
+        </script>
+    </body>
 </html>

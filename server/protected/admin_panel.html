@@ -1,127 +1,174 @@
 <!DOCTYPE html>
 <html lang="sv">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Adminpanel – Burger & Gold</title>
-  <link rel="stylesheet" href="style/index.css">
-  <link rel="stylesheet" href="style/mixin.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="shortcut icon" href="media/favicon.png" type="png">
-</head>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Adminpanel – Burger & Gold</title>
+        <link rel="stylesheet" href="style/index.css" />
+        <link rel="stylesheet" href="style/mixin.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+        />
+        <link rel="shortcut icon" href="media/favicon.png" type="png" />
+    </head>
 
-<body>
-  <!-- Översta menyn -->
-  <div class="topbar">
-    <div class="topbar-content">
+    <body>
+        <!-- Översta menyn -->
+        <div class="topbar">
+            <div class="topbar-content">
+                <button
+                    class="mina-sidor-btn"
+                    onclick="window.location.href='/user_panel'"
+                    style="margin-right: 10px"
+                >
+                    <i
+                        class="fas fa-user"
+                        style="margin: 5px; border-radius: 10%"
+                    ></i>
+                    Mina sidor
+                </button>
+                <button
+                    class="mina-sidor-btn"
+                    onclick="window.location.href='/logout'"
+                >
+                    <i
+                        class="fas fa-right-from-bracket"
+                        style="margin: 5px; border-radius: 10%"
+                    ></i>
+                    Logga ut
+                </button>
+            </div>
+        </div>
 
-      <button class="mina-sidor-btn" onclick="window.location.href='/user_panel'" style="margin-right: 10px;">
-        <i class="fas fa-user" style="margin:5px; border-radius: 10%;"></i> Mina sidor
-      </button>
-      <button class="mina-sidor-btn" onclick="window.location.href='/logout'">
-        <i class="fas fa-right-from-bracket" style="margin:5px; border-radius: 10%;"></i> Logga ut
-      </button>
-    </div>
-  </div>
+        <!-- Huvudmeny -->
+        <header>
+            <div style="color: gold">
+                <img
+                    src="media/favicon.png"
+                    alt=""
+                    width="60px"
+                    height="auto"
+                />
+            </div>
 
-  <!-- Huvudmeny -->
-  <header>
+            <nav id="nav_links">
+                <a href="index.html" style="color: gold; font-size: larger"
+                    >Hem</a
+                >
+                <a
+                    href="product_menu.html"
+                    style="color: gold; font-size: larger"
+                    >Meny</a
+                >
+                <a href="checkout.html" style="color: gold">
+                    <i
+                        class="fas fa-shopping-cart"
+                        style="font-size: 24px; color: gold; font-size: larger"
+                    ></i>
+                </a>
+            </nav>
 
-    
-    <div style="color: gold;"><img src="media/favicon.png" alt="" width="60px" height="auto"></div>
+            <div class="menu_toggle" id="mobile_menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
 
-    <nav id="nav_links" >
-      <a href="index.html" style="color: gold; font-size: larger;">Hem</a>
-      <a href="product_menu.html" style="color: gold;font-size: larger;">Meny</a>
-      <a href="checkout.html" style="color: gold;">
-        <i class="fas fa-shopping-cart" style="font-size: 24px;color: gold; font-size: larger;"></i>
-      </a>
-    </nav>
+            <div class="mobile_nav" id="mobile_nav">
+                <button
+                    id="close_mobile_nav"
+                    style="
+                        align-self: flex-end;
+                        background: none;
+                        border: none;
+                        color: white;
+                        font-size: 24px;
+                        cursor: pointer;
+                    "
+                >
+                    ✖
+                </button>
+                <a href="index.html" style="color: gold">Hem</a>
+                <a href="product_menu.html" style="color: gold">Meny</a>
+                <a href="checkout.html">
+                    <i
+                        class="fas fa-shopping-cart"
+                        style="font-size: 24px; color: gold"
+                    ></i>
+                </a>
+            </div>
+        </header>
 
-    <div class="menu_toggle" id="mobile_menu">
-      <span></span>
-      <span></span>
-      <span></span>
-    </div>
+        <!-- Adminpanel -->
+        <section class="section">
+            <span id="adminName" style="color: gold; font-weight: bold"></span>
+            <h2 style="color: gold">Administratörspanel</h2>
+            <div class="cards">
+                <div class="card">
+                    <img src="/media/addprod.png" alt="" />
+                    <h3>Lägg till produkter</h3>
+                    <p>Lägger till produkter i menyn</p>
+                    <a href="/add_product" class="button">Lägg produkter</a>
+                </div>
+                <div class="card">
+                    <img src="/media/removeprod.png" alt="" />
+                    <h3>Ta bort produkter</h3>
+                    <p>Tar bort produkter i menyn</p>
+                    <a href="/remove_product" class="button"
+                        >Ta bort produkter</a
+                    >
+                </div>
+                <div class="card">
+                    <img src="/media/ändraprisprod.png" alt="" />
+                    <h3>Ändra priser</h3>
+                    <p>Ändrar produktpriser i menyn</p>
+                    <a href="/update_price" class="button">Ändra pris</a>
+                </div>
+                <div class="card">
+                    <img src="/media/beställninghistorik.png" alt="" />
+                    <h3>Historik</h3>
+                    <p>Kollar på gamla beställningar</p>
+                    <a href="#" class="button">Kolla på historik</a>
+                </div>
+                <div class="card">
+                    <img src="/media/aktivabestäningar.png" alt="" />
+                    <h3>Aktiva beställningar</h3>
+                    <p>Kollar på aktiva beställningar</p>
+                    <a href="#" class="button">Kolla på aktiva beställningar</a>
+                </div>
+            </div>
+        </section>
 
-    <div class="mobile_nav" id="mobile_nav">
-      <button id="close_mobile_nav" style="align-self: flex-end; background: none; border: none; color: white; font-size: 24px; cursor: pointer;">✖</button>
-      <a href="index.html" style="color: gold;">Hem</a>
-      <a href="product_menu.html" style="color: gold;">Meny</a>
-      <a href="checkout.html">
-        <i class="fas fa-shopping-cart" style="font-size: 24px; color: gold;"></i>
-      </a>
-    </div>
-  </header>
+        <!-- JavaScript -->
+        <script>
+            // Hämta nuvarande inloggad användare (admin)
+            fetch("/api/me", { credentials: "same-origin" })
+                .then((res) => {
+                    if (!res.ok) throw new Error("Inte inloggad");
+                    return res.json();
+                })
+                .then((user) => {
+                    document.getElementById("adminName").textContent =
+                        "Välkommen, " + user.name;
+                })
+                .catch(() => {
+                    document.getElementById("adminName").textContent =
+                        "Ej inloggad";
+                });
 
-  <!-- Adminpanel -->
-  <section class="section">
-          <span id="adminName" style="color: gold; font-weight: bold;"></span>
-    <h2 style="color: gold;">Administratörspanel</h2>
-    <div class="cards">
-      <div class="card">
-        <img src="/media/addprod.png" alt="">
-        <h3>Lägg till produkter</h3>
-        <p>Lägger till produkter i menyn</p>
-        <a href="/add_product" class="button">Lägg produkter</a>
-      </div>
-      <div class="card">
-        <img src="/media/removeprod.png" alt="">
-        <h3>Ta bort produkter</h3>
-        <p>Tar bort produkter i menyn</p>
-        <a href="/remove_product" class="button">Ta bort produkter</a>
-      </div>
-      <div class="card">
-        <img src="/media/ändraprisprod.png" alt="">
-        <h3>Ändra priser</h3>
-        <p>Ändrar produktpriser i menyn</p>
-        <a href="/update_price" class="button">Ändra pris</a>
-      </div>
-      <div class="card">
-        <img src="/media/beställninghistorik.png" alt="">
-        <h3>Historik</h3>
-        <p>Kollar på gamla beställningar</p>
-        <a href="#" class="button">Kolla på historik</a>
-      </div>
-      <div class="card">
-        <img src="/media/aktivabestäningar.png" alt="">
-        <h3>Aktiva beställningar</h3>
-        <p>Kollar på aktiva beställningar</p>
-        <a href="#" class="button">Kolla på aktiva beställningar</a>
-      </div>
-    </div>
-  </section>
+            // Mobilmeny
+            const mobileMenu = document.getElementById("mobile_menu");
+            const mobileNav = document.getElementById("mobile_nav");
+            const closeBtn = document.getElementById("close_mobile_nav");
 
-  <!-- JavaScript -->
-  <script>
-// Hämta nuvarande inloggad användare (admin)
-fetch('/api/me', { credentials: 'same-origin' })
-  .then(res => {
-    if (!res.ok) throw new Error("Inte inloggad");
-    return res.json();
-  })
-  .then(user => {
-    document.getElementById('adminName').textContent = "Välkommen, " + user.name ;
-  })
-  .catch(() => {
-    document.getElementById('adminName').textContent = "Ej inloggad";
-  });
+            mobileMenu.addEventListener("click", () => {
+                mobileNav.classList.toggle("active");
+            });
 
-
-    // Mobilmeny
-    const mobileMenu = document.getElementById('mobile_menu');
-    const mobileNav = document.getElementById('mobile_nav');
-    const closeBtn = document.getElementById('close_mobile_nav');
-
-    mobileMenu.addEventListener("click", () => {
-      mobileNav.classList.toggle("active");
-    });
-
-    closeBtn.addEventListener("click", () => {
-      mobileNav.classList.remove("active");
-    });
-
-    
-  </script>
-</body>
+            closeBtn.addEventListener("click", () => {
+                mobileNav.classList.remove("active");
+            });
+        </script>
+    </body>
 </html>
