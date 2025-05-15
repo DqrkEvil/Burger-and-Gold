@@ -154,3 +154,8 @@ button[type="submit"] {
     height: 100%;
     display: block;
 }
+
+.footer_col a{
+    color: gold;
+    text-decoration: none;
+}
