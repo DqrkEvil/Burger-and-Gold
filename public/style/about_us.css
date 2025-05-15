@@ -1,0 +1,137 @@
+body {
+  margin: 0;
+  font-family: "Georgia", serif;
+  background-color: #111;
+  color: white;
+}
+header {
+  padding: 20px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #111;
+}
+nav a {
+  margin-left: 20px;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+}
+
+/* Bild tagen från https://unsplash.com/photos/black-metal-bar-close-up-photography-2mf7aNR7aFM */
+.hero { 
+  background: url("../media/about_us_hero.jpg") center center/cover
+    no-repeat;
+  text-align: center;
+  padding: 100px 20px 60px;
+}
+.hero h1 {
+  font-size: 48px;
+  margin-bottom: 20px;
+}
+.hero p {
+  max-width: 700px;
+  margin: 0 auto;
+  font-size: 18px;
+}
+  .topbar {
+    background-color: #1f1f1f;
+    padding: 8px 40px;
+    color: white;
+    font-size: 14px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.topbar-content {
+    display: flex;
+    align-items: center;
+}
+
+.mina-sidor-btn {
+    background-color: gold;
+    color: black;
+    border: none;
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+.content-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 80px 10%;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+.content-section:nth-child(even) {
+  flex-direction: row-reverse;
+}
+.text {
+  flex: 1;
+  font-size: 18px;
+  line-height: 1.6;
+}
+.image-placeholder {
+  flex: 1;
+  height: 300px;
+  background-color: #444;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 16px;
+  border-radius: 6px;
+  text-align: center;
+}
+footer {
+  background-color: #111;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 40px;
+  font-size: 14px;
+}
+.footer-col {
+  margin-bottom: 20px;
+  min-width: 150px;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 32px;
+  }
+  .content-section {
+    flex-direction: column !important;
+    padding: 40px 20px;
+  }
+  .image-placeholder {
+    width: 100%;
+    height: 200px;
+    margin-bottom: 20px;
+  }
+  .text {
+    text-align: center;
+  }
+  footer {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
+  }
+.fullwidth-map {
+    width: 100vw;
+    height: 200px;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+.fullwidth-map iframe {
+    border: 0;
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+}
