@@ -1,150 +1,127 @@
 <!DOCTYPE html>
 <html lang="sv">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Logga in</title>
-        <link rel="stylesheet" href="style/index.css" />
-        <link rel="stylesheet" href="style/mixin.css" />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        />
-        <link rel="shortcut icon" href="media/favicon.png" type="png" />
-    </head>
-    <body>
-        <!-- Översta menyn -->
+  <head>
+    <meta charset="UTF-8" />
+    <title>Logga in</title>
+    <link rel="stylesheet" href="style/index.css" />
+    <link rel="stylesheet" href="style/mixin.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="shortcut icon" href="media/favicon.png" type="png" />
+  </head>
+  <body>
+    <!-- Huvudmeny -->
+    <header>
+      <div style="color: gold">
+        <img src="media/favicon.png" alt="" width="60px" height="auto" />
+      </div>
 
-        <!-- Huvudmeny -->
-        <header>
-            <div style="color: gold">
-                <img
-                    src="media/favicon.png"
-                    alt=""
-                    width="60px"
-                    height="auto"
-                />
-            </div>
+      <nav id="nav_links">
+        <a href="index.html" style="color: gold; font-size: larger">Hem</a>
+        <a href="product_menu.html" style="color: gold; font-size: larger">Meny</a>
+        <a href="checkout.html" style="color: gold">
+          <i class="fas fa-shopping-cart" style="font-size: 24px; color: gold;"></i>
+        </a>
+      </nav>
 
-            <nav id="nav_links">
-                <a href="index.html" style="color: gold; font-size: larger"
-                    >Hem</a
-                >
-                <a
-                    href="product_menu.html"
-                    style="color: gold; font-size: larger"
-                    >Meny</a
-                >
-                <a href="checkout.html" style="color: gold">
-                    <i
-                        class="fas fa-shopping-cart"
-                        style="font-size: 24px; color: gold; font-size: larger"
-                    ></i>
-                </a>
-            </nav>
+      <div class="menu_toggle" id="mobile_menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
 
-            <div class="menu_toggle" id="mobile_menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+      <div class="mobile_nav" id="mobile_nav">
+        <button
+          id="close_mobile_nav"
+          style="
+            align-self: flex-end;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+          "
+        >
+          ✖
+        </button>
+        <a href="index.html" style="color: gold">Hem</a>
+        <a href="product_menu.html" style="color: gold">Meny</a>
+        <a href="checkout.html">
+          <i class="fas fa-shopping-cart" style="font-size: 24px; color: gold"></i>
+        </a>
+      </div>
+    </header>
 
-            <div class="mobile_nav" id="mobile_nav">
-                <button
-                    id="close_mobile_nav"
-                    style="
-                        align-self: flex-end;
-                        background: none;
-                        border: none;
-                        color: white;
-                        font-size: 24px;
-                        cursor: pointer;
-                    "
-                >
-                    ✖
-                </button>
-                <a href="index.html" style="color: gold">Hem</a>
-                <a href="product_menu.html" style="color: gold">Meny</a>
-                <a href="checkout.html">
-                    <i
-                        class="fas fa-shopping-cart"
-                        style="font-size: 24px; color: gold"
-                    ></i>
-                </a>
-            </div>
-        </header>
+    <h2>Logga in</h2>
+    <form id="loginForm">
+      <label for="email">E-post:</label>
+      <input type="email" id="email" name="email" required /><br />
 
-        <h2>Logga in</h2>
-        <form id="loginForm">
-            <label for="email">E-post:</label>
-            <input type="email" id="email" name="email" required /><br />
+      <label for="password">Lösenord:</label>
+      <input type="password" id="password" name="password" required /><br />
 
-            <label for="password">Lösenord:</label>
-            <input
-                type="password"
-                id="password"
-                name="password"
-                required
-            /><br />
+      <button type="submit">Logga in</button>
+      <p>
+        Har du inget konto?
+        <a href="/register.html">Registrera dig här</a>
+      </p>
+    </form>
 
-            <button type="submit">Logga in</button>
-            <p>
-                Har du inget konto?
-                <a href="/register.html">Registrera dig här</a>
-            </p>
-        </form>
+    <script>
+      document.getElementById("loginForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-        <script>
-            document
-                .getElementById("loginForm")
-                .addEventListener("submit", async (e) => {
-                    e.preventDefault();
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
 
-                    const email = document.getElementById("email").value;
-                    const password = document.getElementById("password").value;
+        try {
+          const res = await fetch("/api/login", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "same-origin",
+            body: JSON.stringify({ email, password }),
+          });
 
-                    try {
-                        const res = await fetch("/api/login", {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                            },
-                            body: JSON.stringify({ email, password }),
-                            credentials: "same-origin", // 👈 Viktigt för att skicka cookies (session)
-                        });
+          if (res.ok) {
+            const data = await res.json();
+            alert(`Välkommen ${data.name || "användare"}! Du är nu inloggad.`);
 
-                        if (res.ok) {
-                            const data = await res.json();
-                            alert("Inloggning lyckades!");
+            const loginForm = document.getElementById("loginForm");
+            loginForm.innerHTML = `
+              <p>Du är nu inloggad som <strong>${data.name}</strong>.</p>
+              <p><a href="/user_panel">Gå till användarpanel</a></p>
+              ${
+                data.role.toLowerCase() === "admin"
+                  ? '<p><a href="/admin_panel">Gå till adminpanel</a></p>'
+                  : ""
+              }
+              <p><a href="/index.html">Till startsidan</a></p>
+            `;
+          } else {
+            const msg = await res.text();
+            alert("Fel: " + msg);
+          }
+        } catch (error) {
+          console.error("Nätverksfel:", error);
+          alert("Något gick fel. Försök igen senare.");
+        }
+      });
 
-                            if (
-                                data.role &&
-                                data.role.toLowerCase() === "admin"
-                            ) {
-                                window.location.href = "/admin_panel";
-                            } else {
-                                window.location.href = "/user_panel";
-                            }
-                        } else {
-                            const msg = await res.text();
-                            alert("Fel: " + msg);
-                        }
-                    } catch (error) {
-                        console.error("Nätverksfel:", error);
-                        alert("Något gick fel. Försök igen senare.");
-                    }
-                });
+      const mobileMenu = document.getElementById("mobile_menu");
+      const mobileNav = document.getElementById("mobile_nav");
+      const closeBtn = document.getElementById("close_mobile_nav");
 
-            const mobileMenu = document.getElementById("mobile_menu");
-            const mobileNav = document.getElementById("mobile_nav");
-            const closeBtn = document.getElementById("close_mobile_nav");
+      mobileMenu.addEventListener("click", () => {
+        mobileNav.classList.toggle("active");
+      });
 
-            mobileMenu.addEventListener("click", () => {
-                mobileNav.classList.toggle("active");
-            });
-
-            closeBtn.addEventListener("click", () => {
-                mobileNav.classList.remove("active");
-            });
-        </script>
-    </body>
+      closeBtn.addEventListener("click", () => {
+        mobileNav.classList.remove("active");
+      });
+    </script>
+  </body>
 </html>

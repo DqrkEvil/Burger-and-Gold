@@ -6,6 +6,8 @@ const cors = require("cors");
 const bcrypt = require("bcrypt");
 const session = require("express-session");
 const { Pool } = require("pg");
+const sendEmail = require("./utils/sendEmail");
+
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -28,9 +30,13 @@ app.use(
     secret: "hemlig_session_nyckel",
     resave: false,
     saveUninitialized: false,
-    cookie: { secure: false },
+    cookie: {
+      secure: false,         // sätt till true om du kör HTTPS
+      maxAge: 30 * 60 * 1000 // 30 minuter i millisekunder
+    }
   })
 );
+
 
 // Middleware: inloggningskontroll
 function isAuthenticated(req, res, next) {
@@ -93,21 +99,46 @@ app.get("/api/products", async (req, res) => {
 });
 
 app.post("/api/products", async (req, res) => {
-  const { name, price, info, image } = req.body;
-  if (!name || !price || !info || !image) {
+  const { name, price, info, image, calories, ingredients } = req.body;
+
+  // Grundläggande validering
+  if (!name || !price || !info || !image || !calories || !ingredients) {
     return res.status(400).send("Alla fält krävs");
   }
 
   try {
     const result = await pool.query(
-      "INSERT INTO products (name, price, info, image) VALUES ($1, $2, $3, $4) RETURNING *",
-      [name, price, info, image]
+      `INSERT INTO products (name, price, info, image, calories, ingredients)
+       VALUES ($1, $2, $3, $4, $5, $6)
+       RETURNING *`,
+      [name, price, info, image, calories, ingredients]
     );
+
     res.status(201).json(result.rows[0]);
   } catch (err) {
+    console.error(err);
     res.status(500).send("Kunde inte lägga till produkt");
   }
 });
+
+// Hämta en enskild produkt via ID
+app.get("/api/product/:id", async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const result = await pool.query("SELECT * FROM products WHERE id = $1", [id]);
+
+    if (result.rows.length === 0) {
+      return res.status(404).send("Produkten hittades inte");
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error("Fel vid hämtning av produkt:", err);
+    res.status(500).send("Kunde inte hämta produkt");
+  }
+});
+
 
 app.delete("/api/products/:id", async (req, res) => {
   const { id } = req.params;
@@ -248,6 +279,47 @@ function getLocalIP() {
   }
   return "localhost";
 }
+app.post("/api/checkout", isAuthenticated, async (req, res) => {
+  try {
+    const cart = req.body.cart;
+    const user = req.session.user;
+
+    if (!cart || cart.length === 0) {
+      return res.status(400).send("Varukorgen är tom");
+    }
+
+    const items = cart.map(
+      (item) => `${item.name} (${item.quantity} st) – ${item.price}:-`
+    ).join("\n");
+
+    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+    const message = `
+Hej ${user.name}!
+
+Tack för din beställning hos Burger & Gold.
+
+Din order:
+-----------------------
+${items}
+
+Totalt: ${total.toFixed(2)}:-
+
+Vi återkommer med leveransinformation inom kort. Tar cirka 45 minuter till leverans
+
+Med vänlig hälsning,  
+Burger & Gold
+    `;
+
+    await sendEmail(user.email, "Orderbekräftelse – Burger & Gold", message);
+    res.status(200).send("E-post skickad");
+
+  } catch (err) {
+    console.error("Fel vid e-post:", err);
+    res.status(500).send("Kunde inte skicka e-post");
+  }
+});
+
 
 // Starta server
 app.listen(PORT, () => {

@@ -1,160 +1,211 @@
 <!DOCTYPE html>
 <html lang="sv">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <title>Burger & Gold – Meny</title>
-        <link rel="stylesheet" href="style/index.css" />
-        <link rel="stylesheet" href="style/mixin.css" />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        />
-        <link rel="shortcut icon" href="media/favicon.png" type="png" />
-    </head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Burger & Gold – Meny</title>
+    <link rel="stylesheet" href="style/index.css" />
+    <link rel="stylesheet" href="style/mixin.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="shortcut icon" href="media/favicon.png" type="png" />
+  </head>
 
-    <body>
-        <div class="topbar">
-            <div class="topbar-content">
-                <a href="/login.html" class="mina-sidor-btn">
-                    <i class="fas fa-user" style="margin-right: 6px"></i> Mina
-                    sidor
-                </a>
-            </div>
-        </div>
+  <body>
+    <div class="topbar">
+      <div class="topbar-content">
+        <a href="/login.html" class="mina-sidor-btn">
+          <i class="fas fa-user" style="margin-right: 6px"></i> Mina sidor
+        </a>
+      </div>
+    </div>
 
-        <!-- Huvudmeny -->
-        <header>
-            <div style="color: gold">
-                <img
-                    src="media/favicon.png"
-                    alt=""
-                    width="60px"
-                    height="auto"
-                />
-            </div>
+    <!-- Huvudmeny -->
+    <header>
+      <div style="color: gold">
+        <img src="media/favicon.png" alt="" width="60px" height="auto" />
+      </div>
+      <nav id="nav_links">
+        <a href="index.html" style="color: gold; font-size: larger">Hem</a>
+        <a href="product_menu.html" style="color: gold; font-size: larger"
+          >Meny</a
+        >
+        <a href="/checkout">
+          <i
+            class="fas fa-shopping-cart"
+            style="font-size: 24px; color: gold"
+          ></i>
+        </a>
+      </nav>
+      <div class="menu_toggle" id="mobile_menu">
+        <span></span><span></span><span></span>
+      </div>
+      <div class="mobile_nav" id="mobile_nav">
+        <button
+          id="close_mobile_nav"
+          style="
+            align-self: flex-end;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+          "
+        >
+          ✖
+        </button>
+        <a href="index.html" style="color: gold">Hem</a>
+        <a href="product_menu.html" style="color: gold">Meny</a>
+        <a href="/checkout">
+          <i
+            class="fas fa-shopping-cart"
+            style="font-size: 24px; color: gold"
+          ></i>
+        </a>
+      </div>
+    </header>
 
-            <nav id="nav_links">
-                <a href="index.html" style="color: gold; font-size: larger"
-                    >Hem</a
-                >
-                <a
-                    href="product_menu.html"
-                    style="color: gold; font-size: larger"
-                    >Meny</a
-                >
-                <a href="checkout.html" style="color: gold">
-                    <i
-                        class="fas fa-shopping-cart"
-                        style="font-size: 24px; color: gold; font-size: larger"
-                    ></i>
-                </a>
-            </nav>
+    <section class="section">
+      <h2 style="color: gold">Vår meny</h2>
+      <div id="product-list" class="cards"></div>
+    </section>
 
-            <div class="menu_toggle" id="mobile_menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+    <!-- Info-Modal -->
+    <div id="infoModal" class="modal" style="display: none">
+      <div class="modal-content">
+        <span class="close" style="float: right; cursor: pointer">&times;</span>
+        <h2 id="modalTitle"></h2>
+        <p id="modalInfo"></p>
+        <p id="modalPrice"></p>
+        <p id="modalCalories"></p>
+        <p id="modalIngredients"></p>
+      </div>
+    </div>
 
-            <div class="mobile_nav" id="mobile_nav">
-                <button
-                    id="close_mobile_nav"
-                    style="
-                        align-self: flex-end;
-                        background: none;
-                        border: none;
-                        color: white;
-                        font-size: 24px;
-                        cursor: pointer;
-                    "
-                >
-                    ✖
-                </button>
-                <a href="index.html" style="color: gold">Hem</a>
-                <a href="product_menu.html" style="color: gold">Meny</a>
-                <a href="checkout.html">
-                    <i
-                        class="fas fa-shopping-cart"
-                        style="font-size: 24px; color: gold"
-                    ></i>
-                </a>
-            </div>
-        </header>
+    <footer style="color: gold">
+      <div class="footer_col">
+        <h4>Burger & Gold</h4>
+        <a href="about_us.html">Om Oss</a>
+      </div>
+      <div class="footer_col">
+        <h4>Öppettider</h4>
+        <p>Mån-Tors: 16:00-23:00</p>
+        <p>Fre-Sön: 17:00-21:00</p>
+      </div>
+      <div class="footer_col">
+        <h4>Kontakt</h4>
+        <p>Kronhusgatan 9<br />411 05 Göteborg<br />+46 123456789</p>
+      </div>
+      <div class="footer_col">
+        <h4>Följ oss</h4>
+        <p>Instagram | Facebook | X</p>
+      </div>
+      <div class="fullwidth-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!..."
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        >
+        </iframe>
+      </div>
+    </footer>
 
-        <section class="section">
-            <h2 style="color: gold">Vår meny</h2>
-            <div id="product-list" class="cards"></div>
-        </section>
+    <script>
+      const mobileMenu = document.getElementById("mobile_menu");
+      const mobileNav = document.getElementById("mobile_nav");
+      const closeBtn = document.getElementById("close_mobile_nav");
 
-        <footer style="color: gold">
-            <div class="footer_col">
-                <h4>Burger & Gold</h4>
-                <a href="about_us.html" class="">Om Oss</a>
-            </div>
-            <div class="footer_col">
-                <h4>Öppettider</h4>
-                <p>Mån-Tors: 16:00-23:00</p>
-                <p>Fre-Sön: 17:00-21:00</p>
-            </div>
-            <div class="footer_col">
-                <h4>Kontakt</h4>
-                <p>Kronhusgatan 9<br />411 05 Göteborg<br />+46 123456789</p>
-            </div>
+      mobileMenu.addEventListener("click", () => {
+        mobileNav.classList.toggle("active");
+      });
 
-            <div class="footer_col">
-                <h4>Följ oss</h4>
-                <p>Instagram | Facebook | X</p>
-            </div>
-            <!-- Karta i fullbredd -->
-            <div class="fullwidth-map">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2136.658586920105!2d11.9578696!3d57.7072586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464ff36d2fca13a1%3A0x419e7db7b139e6c!2sKronhusgatan%209%2C%20411%2005%20G%C3%B6teborg!5e0!3m2!1ssv!2sse!4v1714828856113!5m2!1ssv!2sse"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                >
-                </iframe>
-            </div>
-        </footer>
+      closeBtn.addEventListener("click", () => {
+        mobileNav.classList.remove("active");
+      });
 
-        <script>
-            const mobileMenu = document.getElementById("mobile_menu");
-            const mobileNav = document.getElementById("mobile_nav");
-            const closeBtn = document.getElementById("close_mobile_nav");
+      async function loadProducts() {
+        try {
+          const res = await fetch("/api/products");
+          const products = await res.json();
+          const container = document.getElementById("product-list");
 
-            mobileMenu.addEventListener("click", () => {
-                mobileNav.classList.toggle("active");
-            });
+          products.forEach((product) => {
+            const card = document.createElement("div");
+            card.className = "card";
+            card.style.position = "relative";
 
-            closeBtn.addEventListener("click", () => {
-                mobileNav.classList.remove("active");
-            });
-
-            // Ladda produkter
-            async function loadProducts() {
-                try {
-                    const res = await fetch("/api/products");
-                    const products = await res.json();
-                    const container = document.getElementById("product-list");
-
-                    products.forEach((product) => {
-                        const card = document.createElement("div");
-                        card.className = "card";
-                        card.innerHTML = `
+            card.innerHTML = `
+            <button class="info-btn" data-id="${product.id}" style="position:absolute; top:10px; right:10px; background:none; border:none; color:gold; font-size:20px; cursor:pointer;">
+              <i class="fas fa-info-circle"></i>
+            </button>
             <img src="${product.image}" alt="${product.name}">
             <h3>${product.name}</h3>
             <p>${product.info}</p>
             <p>${product.price}:-</p>
+            <button class="add-to-cart-btn"
+                    data-id="${product.id}" 
+                    data-name="${product.name}" 
+                    data-price="${product.price}">
+              Lägg till i varukorg
+            </button>
           `;
-                        container.appendChild(card);
-                    });
-                } catch (err) {
-                    console.error("Kunde inte ladda produkter:", err);
-                }
-            }
+            container.appendChild(card);
+          });
 
-            loadProducts();
-        </script>
-    </body>
+          document.querySelectorAll(".info-btn").forEach((btn) => {
+            btn.addEventListener("click", async () => {
+              const id = btn.dataset.id;
+              const res = await fetch(`/api/product/${id}`);
+              const data = await res.json();
+
+              document.getElementById("modalTitle").textContent = data.name;
+              document.getElementById("modalInfo").textContent =
+                "Info: " + data.info;
+              document.getElementById("modalPrice").textContent =
+                "Pris: " + data.price + ":-";
+              document.getElementById("modalCalories").textContent =
+                "Kalorier: " + data.calories;
+              document.getElementById("modalIngredients").textContent =
+                "Ingredienser: " + data.ingredients;
+
+              document.getElementById("infoModal").style.display = "flex";
+            });
+          });
+        } catch (err) {
+          console.error("Kunde inte ladda produkter:", err);
+        }
+      }
+
+
+      document.querySelector(".close").addEventListener("click", () => {
+        document.getElementById("infoModal").style.display = "none";
+      });
+
+      loadProducts();
+      document.addEventListener("click", (e) => {
+        if (e.target.classList.contains("add-to-cart-btn")) {
+          const card = e.target.closest(".card");
+          const id = e.target.dataset.id;
+          const name = e.target.dataset.name;
+          const price = parseFloat(e.target.dataset.price);
+          const image = card.querySelector("img").src;
+
+          let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+          const existing = cart.find((item) => item.id === id);
+          if (existing) {
+            existing.quantity++;
+          } else {
+            cart.push({ id, name, price, image, quantity: 1 });
+          }
+
+          localStorage.setItem("cart", JSON.stringify(cart));
+          alert(`${name} har lagts till i varukorgen!`);
+        }
+      });
+    </script>
+  </body>
 </html>
