@@ -13,6 +13,79 @@
     <link rel="shortcut icon" href="media/favicon.png" type="png" />
   </head>
 
+  <style>
+    .add-to-cart-btn {
+      background-color: rgb(44, 44, 44);
+      border-radius: 16px;
+      color: rgb(255, 255, 255);
+      width: 100%;
+      height: 50px;
+      font-weight: bolder;
+      font-size: x-large;
+      border: 2px solid gold;
+    }
+    .add-to-cart-btn:hover {
+      background-color: rgba(44, 44, 44, 0.696);
+      border: 2px solid rgba(255, 217, 0, 0.64);
+    }
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .card {
+      width: 250px;
+      min-height: 400px;
+      background-color: #1f1f1f;
+      border: 2px solid rgb(0, 0, 0);
+      border-radius: 16px;
+      padding: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      color: white;
+      text-align: center;
+    }
+
+    .card h3 {
+      margin: 10px 0 5px;
+      font-size: 20px;
+    }
+
+    .card p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+
+    .info-btn {
+      position: absolute;
+      top: 5px;
+      right: 10px;
+      background: none;
+      border: none;
+      color: gold;
+      font-size: 20px;
+      cursor: pointer;
+    }
+  </style>
   <body>
     <div class="topbar">
       <div class="topbar-content">
@@ -87,7 +160,7 @@
     <footer style="color: gold">
       <div class="footer_col">
         <h4>Burger & Gold</h4>
-        <a href="about_us.html">Om Oss</a>
+                <a href="about_us.html" style="color: gold; font-size: large; border-bottom: 2px solid gold;">Om Oss !</a>
       </div>
       <div class="footer_col">
         <h4>Öppettider</h4>
@@ -104,7 +177,7 @@
       </div>
       <div class="fullwidth-map">
         <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!..."
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2136.658586920105!2d11.9578696!3d57.7072586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464ff36d2fca13a1%3A0x419e7db7b139e6c!2sKronhusgatan%209%2C%20411%2005%20G%C3%B6teborg!5e0!3m2!1ssv!2sse!4v1714828856113!5m2!1ssv!2sse"
           allowfullscreen=""
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
@@ -138,10 +211,10 @@
             card.style.position = "relative";
 
             card.innerHTML = `
-            <button class="info-btn" data-id="${product.id}" style="position:absolute; top:10px; right:10px; background:none; border:none; color:gold; font-size:20px; cursor:pointer;">
+            <button class="info-btn" data-id="${product.id}" style="position:absolute; top:1px; right:1px; background:none; border:none; color:gold; font-size:20px; cursor:pointer;">
               <i class="fas fa-info-circle"></i>
             </button>
-            <img src="${product.image}" alt="${product.name}">
+            <img src="${product.image}" alt="${product.name}" width="100px" height="auto">
             <h3>${product.name}</h3>
             <p>${product.info}</p>
             <p>${product.price}:-</p>
@@ -178,7 +251,6 @@
           console.error("Kunde inte ladda produkter:", err);
         }
       }
-
 
       document.querySelector(".close").addEventListener("click", () => {
         document.getElementById("infoModal").style.display = "none";

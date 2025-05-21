@@ -1,130 +1,194 @@
 <!DOCTYPE html>
 <html lang="sv">
-    <head>
-        <meta charset="UTF-8" />
-        <title>Registrera konto</title>
-        <link rel="stylesheet" href="style/index.css" />
-        <link rel="stylesheet" href="style/mixin.css" />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        />
-        <link rel="shortcut icon" href="media/favicon.png" type="png" />
-    </head>
-    <body>
-        <!-- Huvudmeny -->
-        <header>
-            <div style="color: gold">
-                <img
-                    src="media/favicon.png"
-                    alt=""
-                    width="60px"
-                    height="auto"
-                />
-            </div>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Registrera konto – Burger & Gold</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style/index.css" />
+    <link rel="stylesheet" href="style/mixin.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <link rel="shortcut icon" href="media/favicon.png" type="png" />
+    <style>
+      body {
+        margin: 0;
+        font-family: 'Segoe UI', sans-serif;
+        background-color: #1c1c1c;
+        color: white;
+      }
 
-            <nav id="nav_links">
-                <a href="index.html" style="color: gold; font-size: larger"
-                    >Hem</a
-                >
-                <a
-                    href="product_menu.html"
-                    style="color: gold; font-size: larger"
-                    >Meny</a
-                >
-                <a href="checkout.html" style="color: gold">
-                    <i
-                        class="fas fa-shopping-cart"
-                        style="font-size: 24px; color: gold; font-size: larger"
-                    ></i>
-                </a>
-            </nav>
+      h2 {
+        text-align: center;
+        color: gold;
+        margin-top: 40px;
+      }
 
-            <div class="menu_toggle" id="mobile_menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
+      form#registerForm {
+        max-width: 500px;
+        margin: 40px auto;
+        padding: 30px;
+        background-color: #2a2a2a;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
 
-            <div class="mobile_nav" id="mobile_nav">
-                <button
-                    id="close_mobile_nav"
-                    style="
-                        align-self: flex-end;
-                        background: none;
-                        border: none;
-                        color: white;
-                        font-size: 24px;
-                        cursor: pointer;
-                    "
-                >
-                    ✖
-                </button>
-                <a href="index.html" style="color: gold">Hem</a>
-                <a href="product_menu.html" style="color: gold">Meny</a>
-                <a href="checkout.html">
-                    <i
-                        class="fas fa-shopping-cart"
-                        style="font-size: 24px; color: gold"
-                    ></i>
-                </a>
-            </div>
-        </header>
+      form label {
+        color: gold;
+        font-weight: bold;
+        display: flex;
+        flex-direction: column;
+      }
 
-        <h2>Registrera dig</h2>
-        <form id="registerForm">
-            <label>Namn: <input type="text" id="name" required /></label><br />
-            <label>E-post: <input type="email" id="email" required /></label
-            ><br />
-            <label
-                >Lösenord:
-                <input type="password" id="password" required /></label
-            ><br />
-            <label
-                >Telefonnummer:
-                <input type="text" id="nummer" required /></label
-            ><br />
-            <label>Adress: <input type="text" id="address" required /></label
-            ><br />
-            <label>Stad: <input type="text" id="city" required /></label><br />
-            <label
-                >Postnummer:
-                <input type="text" id="postal_code" required /></label
-            ><br />
-            <button type="submit">Skapa konto</button>
-        </form>
+      form input {
+        padding: 12px;
+        border-radius: 8px;
+        border: none;
+        font-size: 16px;
+        margin-top: 5px;
+      }
 
-        <script>
-            document
-                .getElementById("registerForm")
-                .addEventListener("submit", async (e) => {
-                    e.preventDefault();
+      form button {
+        background-color: gold;
+        color: black;
+        font-weight: bold;
+        border: none;
+        padding: 12px;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+      }
 
-                    const user = {
-                        name: document.getElementById("name").value,
-                        email: document.getElementById("email").value,
-                        password: document.getElementById("password").value,
-                        nummer: document.getElementById("nummer").value,
-                        address: document.getElementById("address").value,
-                        city: document.getElementById("city").value,
-                        postal_code:
-                            document.getElementById("postal_code").value,
-                    };
+      form button:hover {
+        background-color: #e6c200;
+      }
 
-                    const res = await fetch("/api/register", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify(user),
-                    });
+      @media (max-width: 480px) {
+        form#registerForm {
+          margin: 20px;
+          padding: 20px;
+        }
 
-                    if (res.ok) {
-                        alert("Registrering lyckades!");
-                        window.location.href = "/user_panel";
-                    } else {
-                        const msg = await res.text();
-                        alert("Fel: " + msg);
-                    }
-                });
-        </script>
-    </body>
+        h2 {
+          font-size: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Huvudmeny -->
+    <header>
+      <div style="color: gold">
+        <img src="media/favicon.png" alt="" width="60px" height="auto" />
+      </div>
+
+      <nav id="nav_links">
+        <a href="index.html" style="color: gold; font-size: larger">Hem</a>
+        <a href="product_menu.html" style="color: gold; font-size: larger">Meny</a>
+        <a href="/checkout" style="color: gold">
+          <i class="fas fa-shopping-cart" style="font-size: 24px; color: gold;"></i>
+        </a>
+      </nav>
+
+      <div class="menu_toggle" id="mobile_menu">
+        <span></span><span></span><span></span>
+      </div>
+
+      <div class="mobile_nav" id="mobile_nav">
+        <button
+          id="close_mobile_nav"
+          style="align-self: flex-end; background: none; border: none; color: white; font-size: 24px; cursor: pointer;"
+        >
+          ✖
+        </button>
+        <a href="index.html" style="color: gold">Hem</a>
+        <a href="product_menu.html" style="color: gold">Meny</a>
+        <a href="/checkout">
+          <i class="fas fa-shopping-cart" style="font-size: 24px; color: gold"></i>
+        </a>
+      </div>
+    </header>
+
+    <!-- Registreringsformulär -->
+    <h2>Registrera dig</h2>
+    <form id="registerForm">
+      <label for="name">Namn:
+        <input type="text" id="name" required />
+      </label>
+
+      <label for="email">E-post:
+        <input type="email" id="email" required />
+      </label>
+
+      <label for="password">Lösenord:
+        <input type="password" id="password" required />
+      </label>
+
+      <label for="nummer">Telefonnummer:
+        <input type="text" id="nummer" required />
+      </label>
+
+      <label for="address">Adress:
+        <input type="text" id="address" required />
+      </label>
+
+      <label for="city">Stad:
+        <input type="text" id="city" required />
+      </label>
+
+      <label for="postal_code">Postnummer:
+        <input type="text" id="postal_code" required />
+      </label>
+
+      <button type="submit">Skapa konto</button>
+    </form>
+
+    <!-- JavaScript -->
+    <script>
+      document.getElementById("registerForm").addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const user = {
+          name: document.getElementById("name").value,
+          email: document.getElementById("email").value,
+          password: document.getElementById("password").value,
+          nummer: document.getElementById("nummer").value,
+          address: document.getElementById("address").value,
+          city: document.getElementById("city").value,
+          postal_code: document.getElementById("postal_code").value,
+        };
+
+        const res = await fetch("/api/register", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(user),
+        });
+
+        if (res.ok) {
+          alert("Registrering lyckades!");
+          window.location.href = "/user_panel";
+        } else {
+          const msg = await res.text();
+          alert("Fel: " + msg);
+        }
+      });
+
+      const mobileMenu = document.getElementById("mobile_menu");
+      const mobileNav = document.getElementById("mobile_nav");
+      const closeBtn = document.getElementById("close_mobile_nav");
+
+      mobileMenu.addEventListener("click", () => {
+        mobileNav.classList.toggle("active");
+      });
+
+      closeBtn.addEventListener("click", () => {
+        mobileNav.classList.remove("active");
+      });
+    </script>
+  </body>
 </html>

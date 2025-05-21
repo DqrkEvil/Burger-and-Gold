@@ -1,137 +1,139 @@
 .fullwidth-map {
-    width: 100vw;
-    height: 200px;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
+  width: 100vw;
+  height: 200px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
 }
 
 .fullwidth-map iframe {
-    border: 0;
-    width: 100%;
-    height: 100%;
-    display: block;
+  border: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
 }
 
 .mobile_nav {
-    position: fixed;
-    top: 0;
-    right: -100%;
-    width: 70%;
-    height: 100%;
-    background-color: #151515;
-    flex-direction: column;
-    padding: 60px 20px;
-    border-left: 2px solid gold;
-    transition: right 0.3s ease-in-out;
-    display: flex; /* always flex, animation handles visibility */
-    z-index: 1000;
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 70%;
+  height: 100%;
+  background-color: #151515;
+  flex-direction: column;
+  padding: 60px 20px;
+  border-left: 2px solid gold;
+  transition: right 0.3s ease-in-out;
+  display: flex; /* always flex, animation handles visibility */
+  z-index: 1000;
 }
 .mobile_nav a {
-    padding: 15px;
-    text-decoration: none;
-    color: white;
-    font-size: 18px;
-    border-bottom: 1px solid #333;
+  padding: 15px;
+  text-decoration: none;
+  color: white;
+  font-size: 18px;
+  border-bottom: 1px solid #333;
 }
 
 .menu_toggle {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
 }
 .menu_toggle span {
-    height: 3px;
-    width: 25px;
-    background: white;
-    margin: 4px 0;
-    border-radius: 2px;
+  height: 3px;
+  width: 25px;
+  background: white;
+  margin: 4px 0;
+  border-radius: 2px;
 }
 
 .mobile_nav.active {
-    right: 0;
+  right: 0;
 }
 
 nav {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
 }
 nav a {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
 }
 
 footer {
-    background-color: #191919;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    padding: 40px;
-    font-size: 14px;
+  background-color: #191919;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  padding: 40px;
+  font-size: 14px;
 }
 footer .footer_col {
-    margin-bottom: 20px;
-    min-width: 150px;
+  margin-bottom: 20px;
+  min-width: 150px;
 }
 
 @media (max-width: 768px) {
-    footer {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        text-align: center;
-        gap: 20px;
-        padding: 30px 10px;
-    }
-    .footer_col {
-        flex: 1 1 45%;
-        min-width: 150px;
-        margin-bottom: 20px;
-    }
-    footer iframe {
-        width: 100%;
-        height: 150px;
-    }
-    .button {
-        width: 100%;
-        max-width: 300px;
-    }
-    .topbar {
-        padding: 8px 20px;
-        justify-content: end;
-    }
-    nav {
-        display: none;
-    }
-    .menu_toggle {
-        display: flex;
-    }
-    .hero {
-        height: auto;
-        padding: 60px 20px;
-    }
-    .hero h1 {
-        font-size: 32px;
-    }
-    .hero p {
-        font-size: 16px;
-    }
-    .info_section {
-        flex-direction: column;
-        padding: 40px 20px;
-    }
-    .info_text {
-        padding-right: 0;
-        text-align: center;
-    }
-    .info_image {
-        margin-top: 20px;
-        width: 100%;
-    }
-    .card {
-        width: 90%;
-        margin: auto;
-    }
-} /*# sourceMappingURL=mixin.css.map */
+  footer {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+    gap: 20px;
+    padding: 30px 10px;
+  }
+  .footer_col {
+    flex: 1 1 45%;
+    min-width: 150px;
+    margin-bottom: 20px;
+  }
+  footer iframe {
+    width: 100%;
+    height: 150px;
+  }
+  .button {
+    width: 100%;
+    max-width: 300px;
+    color: black;
+  }
+  .topbar {
+    padding: 8px 20px;
+    justify-content: end;
+  }
+  nav {
+    display: none;
+  }
+  .menu_toggle {
+    display: flex;
+  }
+  .hero {
+    height: auto;
+    padding: 60px 20px;
+  }
+  .hero h1 {
+    font-size: 32px;
+  }
+  .hero p {
+    font-size: 16px;
+  }
+  .info_section {
+    flex-direction: column;
+    padding: 40px 20px;
+  }
+  .info_text {
+    padding-right: 0;
+    text-align: center;
+  }
+  .info_image {
+    margin-top: 20px;
+    width: 100%;
+  }
+  .card {
+    width: 90%;
+    margin: auto;
+    background-color: gold;
+  }
+}/*# sourceMappingURL=mixin.css.map */

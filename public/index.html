@@ -12,7 +12,54 @@
     />
     <link rel="shortcut icon" href="media/favicon.png" type="png" />
   </head>
+  <style>
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+    .cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      justify-content: center;
+      padding: 20px;
+    }
 
+    .card {
+      width: 250px;
+      min-height: 400px;
+      background-color: #1f1f1f;
+      border: 2px solid rgb(0, 0, 0);
+      border-radius: 16px;
+      padding: 15px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      color: white;
+      text-align: center;
+    }
+
+    .card h3 {
+      margin: 10px 0 5px;
+      font-size: 20px;
+    }
+
+    .card p {
+      margin: 5px 0;
+      font-size: 14px;
+    }
+
+    .card img {
+      width: 100%;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 12px;
+    }
+  </style>
   <body>
     <!-- Översta menyn -->
     <div class="topbar">
@@ -26,13 +73,7 @@
     <!-- Huvudmeny -->
     <header>
       <div>
-        <img
-          src="media/favicon.png"
-          alt=""
-          width="7%"
-          height="auto"
-          style="margin: -1%"
-        />
+        <img src="media/favicon.png" alt="" width="60px" height="auto" />
       </div>
 
       <nav id="nav_links">
@@ -98,7 +139,7 @@
                 </button>
                 <a href="index.html" style="color: gold">Hem</a>
                 <a href="product_menu.html" style="color: gold">Meny</a>
-                <a href="checkout.html">
+                <a href="/checkout">
                     <i
                         class="fas fa-shopping-cart"
                         style="font-size: 24px; color: gold"
@@ -118,34 +159,31 @@
         </section>
 
         <!-- Signaturrätter -->
-        <section class="section">
-            <h2 style="color: gold">Signaturrätter</h2>
-            <div class="cards">
-                <div class="card">
-                    <img
-                        src="media/cheeseburger_home_page.jpg"
-                        alt="Dubbel Cheeseburgare"
-                    />
-                    <h3>Dubbel Cheeseburgare</h3>
-                    <p>Wagyu-nötkött, cheddar-ost, karamelliserad lök, dressing, bacon, inlagd gurka</p>
-                    <p>399:-</p>
-                </div>
+        <!-- Signaturrätter -->
+<section class="section">
+  <h2 style="color: gold">Signaturrätter</h2>
+  <div class="cards">
+    <div class="card">
+      <img src="https://cdn.gccbusinessnews.com/wp-content/uploads/2021/01/05121448/GBN_Oro-Mccoy_01012021.jpg" alt="Golden Burger" />
+      <h3>Golden Burger</h3>
+      <p>En lyxburgare med 24K bladguld, wagyu-biff, tryffelmajonnäs och briochebröd – en kulinarisk upplevelse för finsmakare.</p>
+      <p>500:-</p>
+    </div>
+    <div class="card">
+      <img src="https://mrbroast.com/wp-content/uploads/2021/02/Volcano-Burger.png" alt="Spicy Volcano Burger" />
+      <h3>Spicy Volcano Burger</h3>
+      <p>En het och smakrik burgare med jalapeños, pepperjack-ost och en specialgjord lava-sås som får smaklökarna att explodera.</p>
+      <p>499:-</p>
+    </div>
+    <div class="card">
+      <img src="https://www.burpee.com/media/wysiwyg/2233_2.jpg?optimize=medium" alt="Green Garden Burger" />
+      <h3>Green Garden Burger</h3>
+      <p>En fräsch och helt växtbaserad burgare med krispiga grönsaker, hummus och en saftig ärtproteinbiff.</p>
+      <p>399:-</p>
+    </div>
+  </div>
+</section>
 
-                <div class="card">
-                    <img src="media/mushroom_burger_home_page.jpg" alt="Champinjonburgare" />
-                    <h3>Champinjonburgare</h3>
-                    <p>Smörstekta champinjoner, Wagyu-nötkött, gouda-ost, soltorkade tomater, riven rödbeta</p>
-                    <p>449:-</p>
-                </div>
-
-                <div class="card">
-                    <img src="media/natural_burger_home_page.jpg" alt="Klassisk Burgare" />
-                    <h3>Klassisk Burgare</h3>
-                    <p>Salad, tomat, cheddar-ost, rödlök, gurka, dressing</p>
-                    <p>499:-</p>
-                </div>
-            </div>
-        </section>
 
         <!-- Information -->
         <section class="info_section">
@@ -160,7 +198,7 @@
                     <li>🌟 Michelinbelönade — Erkänd excellens</li>
                     <li>🌿 Premiumingredienser — Lokalt producerade</li>
                 </ul>
-                <a href="about_us.html" class="button;">Om Oss!</a>
+                <a href="about_us.html" class="button" style="color: rgb(0, 0, 0);">Om Oss!</a>
             </div>
             <div class="info_image">
                 <img
@@ -174,7 +212,8 @@
         <footer style="color: gold">
             <div class="footer_col">
                 <h4>Burger & Gold</h4>
-                <a href="about_us.html" class="">Om Oss</a>
+                <a href="about_us.html" style="color: gold; font-size: large; border-bottom: 2px solid gold;">Om Oss !</a>
+
             </div>
             <div class="footer_col">
                 <h4>Öppettider</h4>

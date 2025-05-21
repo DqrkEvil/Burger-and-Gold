@@ -39,7 +39,7 @@
         <a href="product_menu.html" style="color: gold; font-size: larger"
           >Meny</a
         >
-        <a href="checkout.html" style="color: gold">
+        <a href="/checkout" style="color: gold">
           <i
             class="fas fa-shopping-cart"
             style="font-size: 24px; color: gold; font-size: larger"
@@ -78,7 +78,7 @@
       </div>
     </header>
 
-    <span id="userName" style="color: gold; font-weight: bold"></span>
+    <span id="userName" style="color: gold; font-weight: bold; display: flex; justify-content: center; font-size: xx-large;"></span>
 
     <!-- JavaScript för mobilmeny -->
     <script>
@@ -90,7 +90,7 @@
         })
         .then((user) => {
           document.getElementById("userName").textContent =
-            "Välkommen, " + user.name + "!";
+            "Välkommen, " + user.name + " !";
         })
         .catch(() => {
           document.getElementById("userName").textContent = "Ej inloggad";

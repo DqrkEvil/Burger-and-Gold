@@ -39,15 +39,22 @@ header {
     text-shadow: 0 0 5px #000000
 }
 .button {
-    background-color: gold;
-    color: black;
-    border: none;
-    padding: 1% 2%;
-    font-size: 1.5vw;
-    cursor: pointer;
-    text-decoration: none;
-    border-radius: 5px;
+  background-color: gold;
+  color: black;
+  border: none;
+  padding: 1em 2em;
+  font-size: clamp(14px, 2vw, 20px); /* Min: 14px, Max: 20px */
+  cursor: pointer;
+  text-decoration: none;
+  border-radius: 5px;
+  display: inline-block;
+  transition: background-color 0.3s ease;
 }
+
+.button:hover {
+  background-color: #e6c200; /* lite mörkare guld på hover */
+}
+
 .section {
     padding: 60px 40px;
     background-color: #000000;
@@ -170,7 +177,6 @@ button[type="submit"] {
   display: none;
   justify-content: center;
   align-items: center;
-  z-index: 999;
 }
 
 .modal-content {

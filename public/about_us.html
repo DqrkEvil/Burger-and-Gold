@@ -1,15 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="sv">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>About Us - LUXE BURGER</title>
-    <link rel="stylesheet" href="style/mixin.css" />
+    <title>Om oss - Burger & Gold</title>
     <link rel="stylesheet" href="style/about_us.css" />
+    <link rel="stylesheet" href="style/index.css" />
+    <link rel="stylesheet" href="style/mixin.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
+    <link rel="shortcut icon" href="media/favicon.png" type="png" />
   </head>
 
   <body>
@@ -25,13 +27,7 @@
     <!-- Huvudmeny -->
     <header>
       <div>
-        <img
-          src="media/favicon.png"
-          alt=""
-          width="7%"
-          height="auto"
-          style="margin: -1%"
-        />
+        <img src="media/favicon.png" alt="" width="60px" height="auto" />
       </div>
 
       <nav id="nav_links">
@@ -41,7 +37,7 @@
         <a href="product_menu.html" style="color: gold; font-size: larger"
           >Meny</a
         >
-        <a href="checkout.html" style="color: gold">
+        <a href="/checkout" style="color: gold">
           <i
             class="fas fa-shopping-cart"
             style="font-size: 24px; color: gold; font-size: larger"
@@ -71,7 +67,7 @@
         </button>
         <a href="index.html" style="color: gold">Hem</a>
         <a href="product_menu.html" style="color: gold">Meny</a>
-        <a href="checkout.html">
+        <a href="/checkout">
           <i
             class="fas fa-shopping-cart"
             style="font-size: 24px; color: gold"
@@ -82,114 +78,108 @@
 
     <!-- Hjältsektion -->
     <section class="hero">
-      <h1>About LUXE BURGER</h1>
+      <h1>Om Burger & Gold</h1>
       <p>
-        Where gourmet craftsmanship meets high-end indulgence — crafted for
-        those who crave unforgettable flavor.
+        Där gastronomiskt hantverk möter lyx – skapat för dig som längtar efter
+        en oförglömlig smakupplevelse.
       </p>
     </section>
 
     <section class="content-section">
       <div class="text">
-        <h2>Who We Are</h2>
+        <h2>Vilka vi är</h2>
         <p>
-          At LUXE BURGER, we are more than just a restaurant — we are a
-          celebration of culinary passion and precision. Our team of visionary
-          chefs and hospitality experts deliver a dining experience like no
-          other, turning the ordinary burger into a luxurious masterpiece.
+          På Burger & Gold är vi mer än bara en restaurang — vi är en hyllning
+          till kulinarisk passion och perfektion. Vårt team av visionära kockar
+          och serviceproffs skapar en matupplevelse utöver det vanliga där den
+          klassiska burgaren förvandlas till ett lyxigt mästerverk.
         </p>
       </div>
 
-      <!-- Bild tagen från https://unsplash.com/photos/man-in-white-chef-uniform-cooking-4NQEvxW2_4w -->
       <img
-        src="../public/media/about_us_chef.jpg"
-        alt="Our head chef"
+        src="media/about_us_chef.jpg"
+        alt="Vår kökschef"
         class="image-placeholder"
       />
     </section>
 
     <section class="content-section">
       <div class="text">
-        <h2>Our Food Philosophy</h2>
+        <h2>Vår matfilosofi</h2>
         <p>
-          Every dish we serve is made with the world's finest ingredients —
-          Wagyu beef, truffles, brioche buns, fresh lobster, and golden accents.
-          We believe in quality without compromise and flavor without limits.
+          Varje rätt vi serverar tillagas med världens finaste ingredienser —
+          wagyu-biff, tryffel, briochebröd, färsk hummer och gulddetaljer. Vi
+          tror på kompromisslös kvalitet och gränslös smak.
         </p>
       </div>
 
-      <!-- Bild tagen från https://unsplash.com/photos/sliced-meat-on-brown-paper-GXehL5_crJ4 -->
       <img
-        src="../public/media/about_us_wagyu.jpg"
-        alt="Our head chef"
+        src="media/about_us_wagyu.jpg"
+        alt="Vår kökschef"
         class="image-placeholder"
       />
     </section>
 
     <section class="content-section">
       <div class="text">
-        <h2>Our Space</h2>
+        <h2>Vår miljö</h2>
         <p>
-          Step into a refined yet welcoming atmosphere where elegance meets
-          comfort. Our interiors are designed to match our food: bold, sleek,
-          and unforgettable.
+          Kliv in i en elegant men inbjudande miljö där lyx möter komfort. Vår
+          inredning är utformad för att spegla vår mat: djärv, stilren och
+          oförglömlig.
         </p>
       </div>
-      <!-- Bild tagen från https://unsplash.com/photos/two-person-sitting-on-bar-stool-chair-in-front-of-bar-front-desk-8x_fFNrmeDk -->
+
       <img
-        src="../public/media/about_us_restaurant.jpg"
-        alt="Our head chef"
+        src="media/about_us_restaurant.jpg"
+        alt="Restauranginteriör"
         class="image-placeholder"
       />
-
-
-    <!-- Footer -->
     </section>
 
-        <footer style="color: gold">
-            <div class="footer_col">
-                <h4>Burger & Gold</h4>
-                <a href="about_us.html" class="">Om Oss</a>
-            </div>
-            <div class="footer_col">
-                <h4>Öppettider</h4>
-                <p>Mån-Tors: 16:00-23:00</p>
-                <p>Fre-Sön: 17:00-21:00</p>
-            </div>
-            <div class="footer_col">
-                <h4>Kontakt</h4>
-                <p>Kronhusgatan 9<br />411 05 Göteborg<br />+46 123456789</p>
-            </div>
+    <!-- Sidfot -->
+    <footer style="color: gold">
+      <div class="footer_col">
+        <h4>Burger & Gold</h4>
+                <a href="about_us.html" style="color: gold; font-size: large; border-bottom: 2px solid gold;">Om Oss !</a>
+      </div>
+      <div class="footer_col">
+        <h4>Öppettider</h4>
+        <p>Mån-Tors: 16:00-23:00</p>
+        <p>Fre-Sön: 17:00-21:00</p>
+      </div>
+      <div class="footer_col">
+        <h4>Kontakt</h4>
+        <p>Kronhusgatan 9<br />411 05 Göteborg<br />+46 123456789</p>
+      </div>
+      <div class="footer_col">
+        <h4>Följ oss</h4>
+        <p>Instagram | Facebook | X</p>
+      </div>
+      <div class="fullwidth-map">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2136.658586920105!2d11.9578696!3d57.7072586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464ff36d2fca13a1%3A0x419e7db7b139e6c!2sKronhusgatan%209%2C%20411%2005%20G%C3%B6teborg!5e0!3m2!1ssv!2sse!4v1714828856113!5m2!1ssv!2sse"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        >
+        </iframe>
+      </div>
+    </footer>
 
-            <div class="footer_col">
-                <h4>Följ oss</h4>
-                <p>Instagram | Facebook | X</p>
-            </div>
-            <!-- Karta i fullbredd -->
-            <div class="fullwidth-map">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2136.658586920105!2d11.9578696!3d57.7072586!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x464ff36d2fca13a1%3A0x419e7db7b139e6c!2sKronhusgatan%209%2C%20411%2005%20G%C3%B6teborg!5e0!3m2!1ssv!2sse!4v1714828856113!5m2!1ssv!2sse"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                >
-                </iframe>
-            </div>
-        </footer>
+    <!-- JavaScript för mobilmeny -->
+    <script>
+      const mobileMenu = document.getElementById("mobile_menu");
+      const mobileNav = document.getElementById("mobile_nav");
+      const closeBtn = document.getElementById("close_mobile_nav");
 
-        <!-- JavaScript för mobilmeny -->
-        <script>
-            const mobileMenu = document.getElementById("mobile_menu");
-            const mobileNav = document.getElementById("mobile_nav");
-            const closeBtn = document.getElementById("close_mobile_nav");
+      mobileMenu.addEventListener("click", () => {
+        mobileNav.classList.toggle("active");
+      });
 
-            mobileMenu.addEventListener("click", () => {
-                mobileNav.classList.toggle("active");
-            });
-
-            closeBtn.addEventListener("click", () => {
-                mobileNav.classList.remove("active");
-            });
-        </script>
+      closeBtn.addEventListener("click", () => {
+        mobileNav.classList.remove("active");
+      });
+    </script>
   </body>
 </html>
