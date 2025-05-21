@@ -153,6 +153,26 @@
 
     <!-- JS -->
     <script>
+      // Om användaren redan är inloggad, skicka dem vidare automatiskt
+fetch("/api/me", { credentials: "same-origin" })
+  .then(res => {
+    if (!res.ok) return; // Inte inloggad
+    return res.json();
+  })
+  .then(user => {
+    if (!user) return;
+
+    // Om admin → till adminpanel, annars till användarpanel
+    if (user.role === "admin") {
+      window.location.href = "/admin_panel";
+    } else {
+      window.location.href = "/user_panel";
+    }
+  })
+  .catch(() => {
+    // Inget att göra om ej inloggad
+  });
+
       document.getElementById("loginForm").addEventListener("submit", async (e) => {
         e.preventDefault();
 

@@ -11,6 +11,41 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
     <link rel="shortcut icon" href="media/favicon.png" type="png" />
+    <style>
+      #accountForm {
+        max-width: 600px;
+        margin: 2rem auto;
+        background: white;
+        padding: 2rem;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      }
+
+      #accountForm input,
+      #accountForm button {
+        width: 100%;
+        margin-bottom: 1rem;
+        padding: 0.7rem;
+        font-size: 1rem;
+      }
+
+      #accountForm button {
+        background-color: #1e90ff;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      #accountForm button:hover {
+        background-color: #0d74d1;
+      }
+
+      #message {
+        text-align: center;
+        margin-top: 1rem;
+        font-weight: bold;
+      }
+    </style>
   </head>
 
   <body>
@@ -28,7 +63,6 @@
     </div>
 
     <!-- Huvudmeny -->
-    <!-- Huvudmeny -->
     <header>
       <div style="color: gold">
         <img src="media/favicon.png" alt="" width="60px" height="auto" />
@@ -42,15 +76,13 @@
         <a href="/checkout" style="color: gold">
           <i
             class="fas fa-shopping-cart"
-            style="font-size: 24px; color: gold; font-size: larger"
+            style="font-size: 24px; color: gold"
           ></i>
         </a>
       </nav>
 
       <div class="menu_toggle" id="mobile_menu">
-        <span></span>
-        <span></span>
-        <span></span>
+        <span></span><span></span><span></span>
       </div>
 
       <div class="mobile_nav" id="mobile_nav">
@@ -69,20 +101,83 @@
         </button>
         <a href="index.html" style="color: gold">Hem</a>
         <a href="product_menu.html" style="color: gold">Meny</a>
-        <a href="/checkout">
-          <i
+        <a href="/checkout"
+          ><i
             class="fas fa-shopping-cart"
             style="font-size: 24px; color: gold"
-          ></i>
-        </a>
+          ></i
+        ></a>
       </div>
     </header>
 
-    <span id="userName" style="color: gold; font-weight: bold; display: flex; justify-content: center; font-size: xx-large;"></span>
+    <span
+      id="userName"
+      style="
+        color: gold;
+        font-weight: bold;
+        display: flex;
+        justify-content: center;
+        font-size: xx-large;
+      "
+    ></span>
 
-    <!-- JavaScript för mobilmeny -->
+    <!-- Kontoformulär -->
+    <form id="accountForm">
+      <input type="text" id="name" placeholder="Namn" required />
+      <input type="email" id="email" placeholder="E-post" required />
+      <input type="text" id="nummer" placeholder="Telefonnummer" />
+      <input type="text" id="address" placeholder="Adress" />
+      <input type="text" id="city" placeholder="Stad" />
+      <input type="text" id="postal_code" placeholder="Postnummer" />
+      <button type="submit">Spara ändringar</button>
+      <div id="message"></div>
+    </form>
+    <form
+      id="passwordForm"
+      style="
+        max-width: 600px;
+        margin: 2rem auto;
+        background: #fff;
+        padding: 2rem;
+        border-radius: 10px;
+      "
+    >
+      <h2>Byt lösenord</h2>
+      <input
+        type="password"
+        id="currentPassword"
+        placeholder="Nuvarande lösenord"
+        required
+      />
+      <input
+        type="password"
+        id="newPassword"
+        placeholder="Nytt lösenord"
+        required
+      />
+      <button type="submit">Byt lösenord</button>
+      <div
+        id="passwordMessage"
+        style="text-align: center; margin-top: 1rem"
+      ></div>
+    </form>
+
+    <section
+      id="orderHistory"
+      style="
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 1rem;
+        background: #2a2a2a;
+        border-radius: 10px;
+      "
+    >
+      <h2 style="text-align: center">Orderhistorik</h2>
+      <div id="ordersContainer"></div>
+    </section>
+
     <script>
-      // Visa användarens namn från session
+      // Hämta användarens namn till välkomsttext
       fetch("/api/me", { credentials: "same-origin" })
         .then((res) => {
           if (!res.ok) throw new Error("Inte inloggad");
@@ -90,12 +185,145 @@
         })
         .then((user) => {
           document.getElementById("userName").textContent =
-            "Välkommen, " + user.name + " !";
+            "Välkommen, " + user.name + "!";
         })
         .catch(() => {
           document.getElementById("userName").textContent = "Ej inloggad";
         });
 
+      // Ladda användarens info
+      async function loadUser() {
+        try {
+          const res = await fetch("/api/user/me");
+          if (!res.ok) throw new Error("Kunde inte hämta användardata");
+          const user = await res.json();
+
+          document.getElementById("name").value = user.name || "";
+          document.getElementById("email").value = user.email || "";
+          document.getElementById("nummer").value = user.nummer || "";
+          document.getElementById("address").value = user.address || "";
+          document.getElementById("city").value = user.city || "";
+          document.getElementById("postal_code").value = user.postal_code || "";
+        } catch (err) {
+          document.getElementById("message").textContent =
+            "Fel vid laddning: " + err.message;
+        }
+      }
+
+      // Uppdatera användarens info
+      async function updateUser(e) {
+        e.preventDefault();
+        const userData = {
+          name: document.getElementById("name").value,
+          email: document.getElementById("email").value,
+          nummer: document.getElementById("nummer").value,
+          address: document.getElementById("address").value,
+          city: document.getElementById("city").value,
+          postal_code: document.getElementById("postal_code").value,
+        };
+
+        try {
+          const res = await fetch("/api/user/me", {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(userData),
+          });
+
+          const msg = document.getElementById("message");
+          if (res.ok) {
+            msg.textContent = "Dina uppgifter har uppdaterats.";
+            msg.style.color = "green";
+          } else {
+            const text = await res.text();
+            msg.textContent = "Fel: " + text;
+            msg.style.color = "red";
+          }
+        } catch (err) {
+          alert("Tekniskt fel: " + err.message);
+        }
+      }
+
+      document
+        .getElementById("accountForm")
+        .addEventListener("submit", updateUser);
+      window.addEventListener("DOMContentLoaded", loadUser);
+      document
+        .getElementById("passwordForm")
+        .addEventListener("submit", async function (e) {
+          e.preventDefault();
+          const currentPassword =
+            document.getElementById("currentPassword").value;
+          const newPassword = document.getElementById("newPassword").value;
+          const msg = document.getElementById("passwordMessage");
+
+          try {
+            const res = await fetch("/api/user/password", {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({ currentPassword, newPassword }),
+            });
+
+            if (res.ok) {
+              msg.textContent = "Lösenordet har uppdaterats.";
+              msg.style.color = "green";
+              document.getElementById("passwordForm").reset();
+            } else {
+              const error = await res.text();
+              msg.textContent = "Fel: " + error;
+              msg.style.color = "red";
+            }
+          } catch (err) {
+            msg.textContent = "Tekniskt fel: " + err.message;
+            msg.style.color = "red";
+          }
+        });
+
+      // Ladda orderhistorik
+      async function loadOrderHistory() {
+        try {
+          const res = await fetch("/api/my-orders");
+          if (!res.ok) throw new Error("Kunde inte hämta orderhistorik");
+
+          const orders = await res.json();
+          const container = document.getElementById("ordersContainer");
+
+          if (orders.length === 0) {
+            container.innerHTML =
+              "<p style='text-align:center;'>Du har inga tidigare beställningar.</p>";
+            return;
+          }
+
+container.innerHTML = orders
+  .map(
+    (order) => `
+<div style="border: 1px solid #ccc; border-radius: 8px; padding: 1rem; margin-bottom: 1rem; background: #151515;">
+  <strong>Ordernummer:</strong> ${order.order_id}<br />
+  <strong>Datum:</strong> ${new Date(order.order_date).toLocaleString()}<br />
+  <strong>Status:</strong> ${order.status}<br />
+  <strong>Totalt:</strong> ${order.total_amount} kr<br />
+  <strong>Adress:</strong> ${order.address}, ${order.postal_code} ${order.city}<br />
+  <strong>Telefon:</strong> ${order.nummer || "-"}<br />
+</div>
+`
+  )
+  .join("");
+
+        } catch (err) {
+          document.getElementById("ordersContainer").innerHTML =
+            "<p style='color:red;'>Fel vid laddning av orderhistorik: " +
+            err.message +
+            "</p>";
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        loadUser();
+        loadOrderHistory(); // 👈 Lägg till denna
+      });
+
+      // Mobilmeny
       const mobileMenu = document.getElementById("mobile_menu");
       const mobileNav = document.getElementById("mobile_nav");
       const closeBtn = document.getElementById("close_mobile_nav");

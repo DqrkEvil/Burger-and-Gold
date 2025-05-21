@@ -81,6 +81,10 @@ app.get("/remove_product", isAuthenticated, isAdmin, (req, res) => {
   res.sendFile(path.join(__dirname, "protected/remove_product.html"));
 });
 
+app.get("/order_history", isAuthenticated, isAdmin, (req, res) => {
+  res.sendFile(path.join(__dirname, "protected/order_history.html"))
+})
+
 // Logout
 app.get("/logout", (req, res) => {
   req.session.destroy(() => {
@@ -163,12 +167,25 @@ app.delete("/api/products/:id", async (req, res) => {
 });
 
 // API: Ordrar & användare
-app.get("/api/orders", async (req, res) => {
+app.get("/api/orders", isAuthenticated, isAdmin, async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM orders");
+    const result = await pool.query(`
+      SELECT
+        orders.*,
+        users.name AS customer_name,
+        users.email AS customer_email,
+        users.address,
+        users.city,
+        users.postal_code,
+        users.nummer
+      FROM orders
+      JOIN users ON orders.customer_id = users.id
+      ORDER BY orders.order_date DESC
+    `);
     res.json(result.rows);
   } catch (err) {
-    res.status(500).send("Fel vid hämtning av ordrar");
+    console.error("Fel vid hämtning av ordrar:", err);
+    res.status(500).send("Serverfel vid hämtning av ordrar");
   }
 });
 
@@ -267,6 +284,93 @@ app.get("/api/me", (req, res) => {
   }
 });
 
+
+app.get("/api/user/me", isAuthenticated, async (req, res) => {
+  const userId = req.session.user.id;
+
+  try {
+    const result = await pool.query(
+      `SELECT id, name, email, nummer, address, city, postal_code
+       FROM users WHERE id = $1`,
+      [userId]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).send("Användare hittades inte");
+    }
+
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error("Fel vid hämtning av användare:", err);
+    res.status(500).send("Serverfel");
+  }
+});
+
+app.put("/api/user/me", isAuthenticated, async (req, res) => {
+  const userId = req.session.user.id;
+  const { name, email, nummer, address, city, postal_code } = req.body;
+
+  try {
+    await pool.query(
+      `UPDATE users SET
+         name = $1,
+         email = $2,
+         nummer = $3,
+         address = $4,
+         city = $5,
+         postal_code = $6
+       WHERE id = $7`,
+      [name, email, nummer, address, city, postal_code, userId]
+    );
+
+    // Uppdatera sessionsinfo
+    req.session.user.name = name;
+    req.session.user.email = email;
+
+    res.status(200).send("Informationen har uppdaterats");
+  } catch (err) {
+    console.error("Fel vid uppdatering av användare:", err);
+    res.status(500).send("Serverfel");
+  }
+});
+
+app.put("/api/user/password", isAuthenticated, async (req, res) => {
+  const userId = req.session.user.id;
+  const { currentPassword, newPassword } = req.body;
+
+  if (!currentPassword || !newPassword) {
+    return res.status(400).send("Både nuvarande och nytt lösenord krävs");
+  }
+
+  try {
+    const result = await pool.query(
+      "SELECT password FROM users WHERE id = $1",
+      [userId]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).send("Användare hittades inte");
+    }
+
+    const passwordMatch = await bcrypt.compare(currentPassword, result.rows[0].password);
+    if (!passwordMatch) {
+      return res.status(401).send("Fel nuvarande lösenord");
+    }
+
+    const newHashedPassword = await bcrypt.hash(newPassword, 10);
+    await pool.query(
+      "UPDATE users SET password = $1 WHERE id = $2",
+      [newHashedPassword, userId]
+    );
+
+    res.status(200).send("Lösenordet har uppdaterats");
+  } catch (err) {
+    console.error("Fel vid lösenordsbyte:", err);
+    res.status(500).send("Serverfel");
+  }
+});
+
+
 // IP-funktion
 function getLocalIP() {
   const interfaces = os.networkInterfaces();
@@ -288,37 +392,87 @@ app.post("/api/checkout", isAuthenticated, async (req, res) => {
       return res.status(400).send("Varukorgen är tom");
     }
 
+    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    const delivery_address = req.body.delivery_address || user.address || "-";
+    const special_instruction = req.body.special_instruction || "";
+
+    // 1. Spara order i databasen
+    const orderResult = await pool.query(
+      `INSERT INTO orders (customer_id, order_date, status, total_amount, delivery_address, special_instruction)
+       VALUES ($1, NOW(), $2, $3, $4, $5)
+       RETURNING order_id`,
+      [user.id, 'mottagen', total, delivery_address, special_instruction]
+    );
+
+    const orderId = orderResult.rows[0].order_id;
+
+    // 2. Skapa orderbekräftelse
     const items = cart.map(
       (item) => `${item.name} (${item.quantity} st) – ${item.price}:-`
     ).join("\n");
-
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
     const message = `
 Hej ${user.name}!
 
 Tack för din beställning hos Burger & Gold.
 
-Din order:
+Ordernummer: ${orderId}
 -----------------------
 ${items}
 
 Totalt: ${total.toFixed(2)}:-
+Leveransadress: ${delivery_address}
+Noteringar: ${special_instruction}
 
-Vi återkommer med leveransinformation inom kort. Tar cirka 45 minuter till leverans
+Vi återkommer med leveransinfo inom 45 minuter.
 
-Med vänlig hälsning,  
+Med vänlig hälsning,
 Burger & Gold
     `;
 
+    // 3. Skicka e-post
     await sendEmail(user.email, "Orderbekräftelse – Burger & Gold", message);
-    res.status(200).send("E-post skickad");
+
+    res.status(200).send("Order sparad och e-post skickad");
 
   } catch (err) {
-    console.error("Fel vid e-post:", err);
-    res.status(500).send("Kunde inte skicka e-post");
+    console.error("Fel vid checkout:", err);
+    res.status(500).send("Kunde inte spara order");
   }
 });
+
+app.get("/api/my-orders", isAuthenticated, async (req, res) => {
+  const userId = req.session.user.id;
+
+  try {
+    const result = await pool.query(
+      `SELECT 
+         o.order_id,
+         o.order_date,
+         o.status,
+         o.total_amount,
+         o.delivery_address,
+         o.special_instruction,
+         u.name,
+         u.email,
+         u.address,
+         u.city,
+         u.postal_code,
+         u.nummer
+       FROM orders o
+       JOIN users u ON o.customer_id = u.id
+       WHERE o.customer_id = $1
+       ORDER BY o.order_date DESC`,
+      [userId]
+    );
+
+    res.json(result.rows);
+  } catch (err) {
+    console.error("Fel vid hämtning av orderhistorik:", err);
+    res.status(500).send("Kunde inte hämta orderhistorik");
+  }
+});
+
 
 
 // Starta server
