@@ -98,6 +98,7 @@ app.get("/api/products", async (req, res) => {
     const result = await pool.query("SELECT * FROM products");
     res.json(result.rows);
   } catch (err) {
+    console.error("Fel vid hämtning av produkter:", err);
     res.status(500).send("Fel vid hämtning av produkter");
   }
 });
