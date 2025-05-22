@@ -10,7 +10,7 @@ const sendEmail = require("./utils/sendEmail");
 
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT;
 
 // PostgreSQL-anslutning
 const pool = new Pool({
